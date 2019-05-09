@@ -26,5 +26,17 @@
        <put-attribute name="title" value="registerImagen" />  
        <put-attribute name="body" value="/WEB-INF/views/Imagen/RegisterImagen.jsp" />  
    </definition>  
+      <definition name="RegisterImagen" extends="base-definition">  
+       <put-attribute name="title" value="registerImagen" />  
+       <put-attribute name="body" value="/WEB-INF/views/Imagen/RegisterImagen.jsp" />  
+   </definition>  
+      <definition name="upload" extends="base-definition">  
+       <put-attribute name="title" value="Upload" />  
+       <put-attribute name="body" value="/WEB-INF/views/Imagen/upload.jsp" />  
+   </definition>  
+      <definition name="uploadStatus" extends="base-definition">  
+       <put-attribute name="title" value="UploadStatus" />  
+       <put-attribute name="body" value="/WEB-INF/views/Imagen/uploadStatus.jsp" />  
+   </definition>  
        
            </tiles-definitions>  
