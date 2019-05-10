@@ -26,8 +26,8 @@ public class WelcomeController {
 		//model.put("message", this.message);
 		return "home";
 	}
-	   @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
-	   public ModelAndView student( ModelMap mod) {
+	  // @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
+	   //public ModelAndView student( ModelMap mod) {
 		   //stockClothes stockClothes= new stockClothes();
 		   //mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
 		   //mod.addAttribute("Mensaje", "Registra informacion basica");
@@ -37,8 +37,8 @@ public class WelcomeController {
 		   //mdod.setClothingline(ob);
 		   //mdod.setImagen(img);
 		   
-		   return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
+		 //  return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
 		   
-	   }
+	   //}
 
 }

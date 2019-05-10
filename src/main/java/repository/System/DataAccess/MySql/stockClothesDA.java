@@ -1,6 +1,7 @@
 package repository.System.DataAccess.MySql;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Imagen;
+import domain.System.BusinessEntity.ViewStockBE;
 import infrastructure.System.Adapters.EntityDBConnection;
 import infrastructure.System.Adapters.MySqlAdapter;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class stockClothesDA {
 	        	            .createQuery(sql)
 	        	            .addParameter("idclothing", 1)
 	        	            .executeAndFetch(Imagen.class);
-	        	    result.forEach(System.out::println);
+	        	   // result.forEach(System.out::println);
 	          }
 			return null;
 		} catch (IOException e) {
@@ -66,5 +67,47 @@ public class stockClothesDA {
 		}
     	return result;
     } 
-   
+    public static   List<ViewStockBE>  getViewStock( ViewStockBE objs)
+				throws SQLException, IOException {
+			Connection dbConnection = null;
+			CallableStatement callableStatement = null;
+			ResultSet rs = null;
+	            List<ViewStockBE> lst =new ArrayList<ViewStockBE>();
+			String getDBUSERCursorSql = "{CALL SelectMenuParent()}";
+
+			try {
+				dbConnection = MySqlAdapter.connectDatabase();
+			 	callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
+			  callableStatement.execute();
+					   ResultSet resultSet = callableStatement.getResultSet();
+	                while (resultSet.next()) {
+	                	  String name = resultSet.getString("name");
+		                    String path = resultSet.getString("path");
+	                    System.out.println(
+	                            "| " + name + " | " + path );
+	                }
+	                resultSet.close();
+	 
+
+			} catch (SQLException e) {
+
+				System.out.println(e.getMessage());
+
+			} finally {
+
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (callableStatement != null) {
+					callableStatement.close();
+				}
+
+				if (dbConnection != null) {
+					dbConnection.close();
+				}
+
+			}
+	 return lst;
+		}
 }

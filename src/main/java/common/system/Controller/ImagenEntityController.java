@@ -56,8 +56,8 @@ public class ImagenEntityController {
 
 
 	    
-		@RequestMapping(value = "/uploadStatus", method = RequestMethod.POST)
-		   public String singleFileUpload(@RequestParam("file") MultipartFile file,
+		@RequestMapping(value = "/addImagen", method = RequestMethod.POST)
+		   public String singleFileUpload(@ModelAttribute("command")ViewStockBE ViewStockBE,@RequestParam("file") MultipartFile file,
                    RedirectAttributes redirectAttributes) throws IOException {
 			   if (file.isEmpty()) {
 		            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -83,9 +83,9 @@ public class ImagenEntityController {
 		   }
 		
 		
-	    @RequestMapping(value = "/upload", method = RequestMethod.GET)
+	    @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
 		   public ModelAndView upload( ModelMap mod) {
-	    	 return new ModelAndView("upload", "command", null);
+	    	 return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
 	    }
     	   
 }

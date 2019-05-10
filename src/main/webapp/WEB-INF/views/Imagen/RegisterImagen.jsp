@@ -12,7 +12,7 @@
 
 <body>
   <div class="container">
-      <form:form method = "POST" action = "/Gamachicaswindow/addImagen">
+      <form:form method = "POST" action ="/addImagen" enctype="multipart/form-data">
   <fieldset>
     <div id="legend">
       <legend class="">Registrar Informacion de la imagen</legend>
@@ -69,8 +69,8 @@
       </div>
     </div>
   </fieldset>
-      </form:form>
-           <form action="fileUpload" method="post" enctype="multipart/form-data">
+     
+           
       <div class="form-group">
         <label>Select File</label> 
         <input class="form-control" type="file" name="file">
@@ -78,8 +78,9 @@
       <div class="form-group">
         <button class="btn btn-primary" type="submit">Upload</button>
       </div>
-    </form>
+  </form:form>
             </div>
+           
 
 </body>
 </html>
