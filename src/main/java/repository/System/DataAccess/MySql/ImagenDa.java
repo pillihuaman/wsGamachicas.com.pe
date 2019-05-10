@@ -97,7 +97,7 @@ public class ImagenDa {
 	          try (org.sql2o.Connection con =  sql2o.open()){
 	        	     result = con
 	        	            .createQuery(sql)
-	        	            .addParameter("idimagen", 3)
+	        	            .addParameter("idimagen", 1)
 	        	            .executeAndFetch(Imagen.class);
 	        	  
 	          }

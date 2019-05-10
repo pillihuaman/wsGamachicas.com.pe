@@ -7,15 +7,15 @@
     <title>Spring MVC Example</title>    
 </head>    
 <body>    
-<h1>Welcome to Spring MVC</h1>    
+<h5>Bienvenidos a Gamachicas productos de gamarra ventas al mayor y por unidad al mejor precio y calidad del Peru</h5>    
     <p>Message is: ${message}</p> 
       
   									
 							<div class="col-md-3 product-men">
 								<div class="men-pro-item simpleCart_shelfItem">
 									<div class="men-thumb-item">
-										<img src="<c:url value="/static/images/m2.jpg"/>"  alt="" class="pro-image-front">
-										<img src="images/m2.jpg" alt="" class="pro-image-back">
+										<img src="<c:url value="http://localhost:8083/sid"/>"  alt="" class="pro-image-front">
+										<img src="http://localhost:8083/sid" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
 													<a href="single.html" class="link-product-add-cart">Quick View</a>

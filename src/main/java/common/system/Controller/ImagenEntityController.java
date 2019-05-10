@@ -29,6 +29,8 @@ import domain.System.BusinessEntity.CrudImagenBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Imagen;
+import model.system.repository.ImagenRepository;
+import model.system.repository.stockClothes;
 import repository.System.DataAccess.MySql.ImagenDa;
 @RestController
 public class ImagenEntityController {
@@ -70,6 +72,31 @@ public class ImagenEntityController {
 		            byte[] bytes = file.getBytes();
 		            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
 		            Files.write(path, bytes);
+		            
+		            //zph
+		        	ViewStockBE objs= new ViewStockBE();
+		    		ImagenRepository insert= new ImagenRepository();
+		        	stockClothes stockClothes= new stockClothes();
+		        	Imagen img = new Imagen();
+		        	img.setImagendata(bytes);
+		        	img.setCreatedate(ViewStockBE.getImagen().getCreatedate());
+		           	img.setCountViews(ViewStockBE.getImagen().getCountViews());
+		           	img.setDescription(ViewStockBE.getImagen().getDescription());
+		           	img.setIdposition(ViewStockBE.getImagen().getIdposition());
+		           	img.setPositionweb(ViewStockBE.getImagen().getPositionweb());
+		        	img.setName(ViewStockBE.getImagen().getName());
+		        	ViewStockBE.setImagen(img);
+		        	
+		        	CrudImagenBE crud= new CrudImagenBE();
+		        	crud.setClothingline(ViewStockBE.getClothingline());
+		        	crud.setImagen(ViewStockBE.getImagen());
+		        	crud.setTest(ViewStockBE.getTest());
+		        	//int test=insert.tesinsert(crud);
+		        	int idiamgen=insert.registerImagen(crud);
+		        	stockClothes.getViewStock(objs);
+		        	List<Imagen> imf  = null;
+		        	imf=  insert.listaImagen();
+		        	//zph
 
 		            redirectAttributes.addFlashAttribute("message",
 		                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
@@ -85,6 +112,14 @@ public class ImagenEntityController {
 		
 	    @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
 		   public ModelAndView upload( ModelMap mod) {
+               stockClothes stockClothes= new stockClothes();
+			   mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
+			   mod.addAttribute("Mensaje", "Registra informacion basica");
+			   ViewStockBE mdod = new ViewStockBE();
+			   Clothingline ob = new Clothingline();
+			   Imagen img = new Imagen();
+			   mdod.setClothingline(ob);
+			   mdod.setImagen(img);
 	    	 return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
 	    }
     	   
