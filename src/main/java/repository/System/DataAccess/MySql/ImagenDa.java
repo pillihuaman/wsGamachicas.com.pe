@@ -93,11 +93,11 @@ public class ImagenDa {
     	try {
 			EntityDBConnection conne= MySqlAdapter.getConnectionString();
 			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
-	          String sql ="select * from gamachicas.Imagen  where idimagen = :idimagen;";
+	          String sql ="select  * from gamachicas.Imagen  order by positionweb desc limit 10;";
 	          try (org.sql2o.Connection con =  sql2o.open()){
 	        	     result = con
 	        	            .createQuery(sql)
-	        	            .addParameter("idimagen", 1)
+	        	            //.addParameter("idimagen", 1)
 	        	            .executeAndFetch(Imagen.class);
 	        	  
 	          }
@@ -108,4 +108,33 @@ public class ImagenDa {
 		}
     	return result;
     }
+    public  static List<Imagen>  getimg(int idimagen) 
+    {
+
+      	 List<Imagen> result= null;
+     	try {
+ 			Class.forName("com.mysql.jdbc.Driver");
+ 		} catch (ClassNotFoundException e1) {
+ 			e1.printStackTrace();
+ 		} 
+     	try {
+ 			EntityDBConnection conne= MySqlAdapter.getConnectionString();
+ 			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+ 	          String sql ="select  * from gamachicas.Imagen  where idimagen= :idimagen;";
+ 	          try (org.sql2o.Connection con =  sql2o.open()){
+ 	        	     result = con
+ 	        	            .createQuery(sql)
+ 	        	            .addParameter("idimagen", idimagen)
+ 	        	            .executeAndFetch(Imagen.class);
+ 	        	  
+ 	          }
+ 			return result;
+ 		} catch (IOException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+     	return result;	
+    	
+    }
+
 }

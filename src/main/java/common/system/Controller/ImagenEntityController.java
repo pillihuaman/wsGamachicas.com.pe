@@ -36,16 +36,18 @@ import repository.System.DataAccess.MySql.ImagenDa;
 public class ImagenEntityController {
 	  //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C://Users//zarmir//Documents//";
-	   @RequestMapping(value = "/sid", method = RequestMethod.GET,
+	 
+    @RequestMapping(value = "/sid", method = RequestMethod.GET,
 	            produces = MediaType.IMAGE_JPEG_VALUE)
-	    public ResponseEntity<byte[]> getImage() throws IOException {
-
+	    public ResponseEntity<byte[]> getImage(@RequestParam("id") int idimagen) throws IOException {
+	    	System.out.println("ID is " + idimagen);
 	    	ClassPathResource imgFile = new ClassPathResource("image/ropa.jpeg");
 	        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 	        ImagenDa obj = new ImagenDa();
- 	        List<Imagen> imf  = null;
+	        List<Imagen>  imf  =  null;
 	        //byte[] bytes= null;
-	       imf= obj.list();
+ 	       //getimg
+	       imf= obj.getimg(idimagen);
 	        for (Imagen imagen : imf) {
 	         bytes=imagen.getImagendata(); 
 			}

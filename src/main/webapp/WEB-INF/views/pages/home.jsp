@@ -4,18 +4,16 @@
 <!DOCTYPE html>
 <html>    
 <head>    
-    <title>Spring MVC Example</title>    
+    <title>Gamachicas.com</title>    
 </head>    
 <body>    
-<h5>Bienvenidos a Gamachicas productos de gamarra ventas al mayor y por unidad al mejor precio y calidad del Peru</h5>    
-    <p>Message is: ${message}</p> 
-      
-  									
-							<div class="col-md-3 product-men">
+    <c:forEach items="${listaimagenes}" var="item">
+    
+    	<div class="col-md-3 product-men">
 								<div class="men-pro-item simpleCart_shelfItem">
 									<div class="men-thumb-item">
-										<img src="<c:url value="http://localhost:8083/sid"/>"  alt="" class="pro-image-front">
-										<img src="http://localhost:8083/sid" alt="" class="pro-image-back">
+										<img src="<c:url value="${item}"/>"  alt="" class="pro-image-front">
+										<img src="${item}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
 													<a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -49,6 +47,10 @@
 														</div>
 														</div>
 														</div>
+</c:forEach>
+      
+  									
+						
 														
     
     
