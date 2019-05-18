@@ -16,8 +16,12 @@
 										<img src="${item}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+												
+										<a href="<c:url value="/DetallaImagen?id=4334"/>" class="link-product-add-cart" ">Ver Detalle</a>
+									   <a href="<c:url value="/DetallaImagen?id=4334"/>" >hello</a>
+												
 												</div>
+
 											</div>
 											<span class="product-new-top">New</span>
 											
@@ -40,7 +44,7 @@
 																	<input type="hidden" name="currency_code" value="USD" />
 																	<input type="hidden" name="return" value=" " />
 																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
+																	<input type="submit" name="submit" value="Pedir" class="button" />
 																</fieldset>
 															</form>
 														</div> 
@@ -48,12 +52,6 @@
 														</div>
 														</div>
 </c:forEach>
-      
-  									
-						
-														
-    
-    
- 
+	
 </body>    
 </html>   

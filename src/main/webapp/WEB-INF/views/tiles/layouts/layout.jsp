@@ -18,7 +18,7 @@
  <link href="<c:url value="/static/css/font-awesome.css" />" rel="stylesheet">   
  <link href="<c:url value="/static/css/flexslider.css" />" rel="stylesheet">   
  <link href="<c:url value="/static/css/easy-responsive-tabs.css" />" rel="stylesheet">   
-
+ <link href="<c:url value="/static/css/gamachicas/gamachicas.css" />" rel="stylesheet">
 
     </head>    
     <body>    
@@ -41,6 +41,7 @@
     <script src="<c:url value="/static/js/minicart.min.js" />"></script>  
     <script src="<c:url value="/static/js/modernizr.custom.js" />"></script>  
     <script src="<c:url value="/static/js/move-top.js" />"></script>  
+    <script src="<c:url value="/static/js/gamachicas/home.js" />"></script> 
 
     
     

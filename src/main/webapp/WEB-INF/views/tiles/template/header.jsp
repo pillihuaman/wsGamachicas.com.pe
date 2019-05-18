@@ -274,7 +274,7 @@
 <!-- //Modal2 -->
 
 <!-- banner -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel2" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>

@@ -1,5 +1,6 @@
 package common.system.Controller;
 import java.io.ByteArrayInputStream;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -123,6 +125,21 @@ public class ImagenEntityController {
 			   mdod.setClothingline(ob);
 			   mdod.setImagen(img);
 	    	 return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
+	    }
+	    
+	    @RequestMapping(value = "/DetallaImagen", method = RequestMethod.GET)
+		   public ModelAndView DetallaImagen(@RequestParam("id") int idimagen, ModelMap mod) {
+	    	int idimagent=idimagen;
+	    	 
+	    	stockClothes stockClothes= new stockClothes();
+			   mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
+			   mod.addAttribute("Mensaje", "Registra informacion basica");
+			   ViewStockBE mdod = new ViewStockBE();
+			   Clothingline ob = new Clothingline();
+			   Imagen img = new Imagen();
+			   mdod.setClothingline(ob);
+			   mdod.setImagen(img);
+	    	 return new ModelAndView("DetallaImagen", "command", new ViewStockBE());
 	    }
     	   
 }
