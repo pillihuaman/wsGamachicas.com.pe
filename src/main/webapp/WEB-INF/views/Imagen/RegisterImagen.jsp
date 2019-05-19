@@ -61,22 +61,38 @@
       </div>
     </div>
  <br>
+  </fieldset>
+  
     <div class="control-group">
-      <!-- Button -->
+      <label class="control-label">Foto Principal o Frontal</label>
       <div class="controls">
-      <input type="submit" class="btn btn-success" value="Registrar">
-      
+        <input class="form-control" type="file" name="files">
       </div>
     </div>
-  </fieldset>
-     
-           
-      <div class="form-group">
-        <label>Select File</label> 
-        <input class="form-control" type="file" name="file">
+        <br>
+        <div class="control-group">
+      <label class="control-label">Foto de espalda o Trasero</label>
+      <div class="controls">
+        <input class="form-control" type="file" name="files">
       </div>
+    </div>
+        <br>
+        <div class="control-group">
+      <label class="control-label">Foto Lateral Derecho</label>
+      <div class="controls">
+        <input class="form-control" type="file" name="files">
+      </div>
+    </div>
+        <br>
+        <div class="control-group">
+      <label class="control-label">Foto Lateral izquierdo</label>
+      <div class="controls">
+        <input class="form-control" type="file" name="files">
+      </div>
+    </div>
+    <br>
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">Upload</button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
       </div>
   </form:form>
             </div>

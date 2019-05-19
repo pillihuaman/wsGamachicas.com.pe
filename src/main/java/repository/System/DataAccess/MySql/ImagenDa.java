@@ -9,7 +9,9 @@ import java.util.List;
 import org.sql2o.Sql2o;
 //import com.google.protobuf.DescriptorProtos.SourceCodeInfo.Location;
 import domain.System.BusinessEntity.CrudImagenBE;
+import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
 import infrastructure.System.Adapters.EntityDBConnection;
 import infrastructure.System.Adapters.MySqlAdapter;
@@ -17,10 +19,9 @@ import infrastructure.System.Adapters.MySqlAdapter;
 public class ImagenDa {
 
 	
-    public  static  int registerImagen (CrudImagenBE CrudImagenBE) 
+    public  static  BigInteger registerImagen (CrudImagenBE CrudImagenBE) 
     {
-    	int idImagen=0;
-    	BigInteger idImagen1;
+    	BigInteger idImagen1=null;
     	try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -29,8 +30,8 @@ public class ImagenDa {
     	try {
 			EntityDBConnection conne= MySqlAdapter.getConnectionString();
 			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
-	          String sql ="INSERT INTO Gamachicas.imagen(name,idclothing,idposition,positionweb,countViews,imagendata,url,DESCRIPTION,STATUS,createdate,updatedate,idclothingline) " + 
-	          		"VALUES(:name,:idclothing,:idposition,:positionweb,:countViews,:imagendata,:url,:DESCRIPTION,:STATUS,:createdate,:updatedate,:idclothingline)";
+	          String sql ="INSERT INTO Gamachicas.imagen(name,idclothing,idposition,positionweb,countViews,imagendata,DESCRIPTION,STATUS,createdate,updatedate,idclothingline) " + 
+	          		"VALUES(:name,:idclothing,:idposition,:positionweb,:countViews,:imagendata,:DESCRIPTION,:STATUS,:createdate,:updatedate,:idclothingline)";
 	          try (org.sql2o.Connection con =  sql2o.open()){
 	        	  idImagen1=(BigInteger) con.createQuery(sql,true)
 	        			  .addParameter("name", CrudImagenBE.getImagen().getName())
@@ -39,7 +40,7 @@ public class ImagenDa {
 	        			  .addParameter("positionweb", CrudImagenBE.getImagen().getPositionweb())
 	        			  .addParameter("countViews", CrudImagenBE.getImagen().getCountViews())
 	        			  .addParameter("imagendata", CrudImagenBE.getImagen().getImagendata())
-	        			  .addParameter("url", "url")
+	        			 // .addParameter("url", "")
 	        			  .addParameter("DESCRIPTION", CrudImagenBE.getImagen().getDescription())
 	        			  .addParameter("STATUS", true)
 	        			  .addParameter("createdate", LocalDateTime.now())
@@ -48,13 +49,48 @@ public class ImagenDa {
 	        			 .executeUpdate()
 	        			 .getKey();
 	          }
-			return idImagen;
+			return idImagen1;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return idImagen;
+    	return idImagen1;
     } 
+   
+    public  static  BigInteger RegisterDetailImagen (ViewStockBE ViewStockBE) 
+    {
+    
+    	BigInteger idImagen1= null;
+    	try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} 
+    	try {
+			EntityDBConnection conne= MySqlAdapter.getConnectionString();
+			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+	          String sql ="INSERT INTO gamachicas.detailimagen(idimagen,Descripcion,vista,imagendata,url,createdate,updatedate,status) " + 
+	          		"VALUES(:idimagen,:Descripcion,:vista,:imagendata,:url,:createdate,:updatedate,:status);";
+	          try (org.sql2o.Connection con =  sql2o.open()){
+	        	  idImagen1=(BigInteger) con.createQuery(sql,true)
+	        			  .addParameter("idimagen", ViewStockBE.getDetailimagen().getIdimagen())
+	        			  .addParameter("Descripcion", ViewStockBE.getDetailimagen().getDescripcion())
+	        			  .addParameter("vista", ViewStockBE.getDetailimagen().getVista())
+	        			  .addParameter("imagendata", ViewStockBE.getDetailimagen().getImagendata())
+	        			  .addParameter("url", "url test")
+	        			  .addParameter("createdate", LocalDateTime.now())
+	        			  .addParameter("updatedate",LocalDateTime.now())
+	        			  .addParameter("status", true)
+	        			 .executeUpdate()
+	        			 .getKey();
+	          }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return idImagen1;
+    } 
+    
     public  static  int tesinsert (CrudImagenBE CrudImagenBE) 
     {
     	Integer idImagen=0;
@@ -126,6 +162,34 @@ public class ImagenDa {
  	        	            .createQuery(sql)
  	        	            .addParameter("idimagen", idimagen)
  	        	            .executeAndFetch(Imagen.class);
+ 	        	  
+ 	          }
+ 			return result;
+ 		} catch (IOException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+     	return result;	
+    	
+    }
+    public  static List<Detailimagen>  ListaDetalleImagenXID(int idimagen) 
+    {
+
+      	 List<Detailimagen> result= null;
+     	try {
+ 			Class.forName("com.mysql.jdbc.Driver");
+ 		} catch (ClassNotFoundException e1) {
+ 			e1.printStackTrace();
+ 		} 
+     	try {
+ 			EntityDBConnection conne= MySqlAdapter.getConnectionString();
+ 			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+ 	          String sql ="select * from gamachicas.detailimagen where idimagen= :idimagen;";
+ 	          try (org.sql2o.Connection con =  sql2o.open()){
+ 	        	     result = con
+ 	        	            .createQuery(sql)
+ 	        	            .addParameter("idimagen", idimagen)
+ 	        	            .executeAndFetch(Detailimagen.class);
  	        	  
  	          }
  			return result;

@@ -5,6 +5,15 @@ public class ViewStockBE {
 	   private Color Color;
 
 	   private Clothingline Clothingline;
+      public Detailimagen getDetailimagen() {
+		return Detailimagen;
+	}
+
+	public void setDetailimagen(Detailimagen detailimagen) {
+		Detailimagen = detailimagen;
+	}
+
+	private Detailimagen Detailimagen;
 	   public Imagen getImagen() {
 		return Imagen;
 	}

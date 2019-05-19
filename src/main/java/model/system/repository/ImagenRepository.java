@@ -1,8 +1,11 @@
 package model.system.repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
+import domain.System.BusinessEntity.ViewStockBE;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.BusinessLogic.ImagenBL;
 import model.system.Abstract.Iimagen;
@@ -10,21 +13,46 @@ import model.system.Abstract.Iimagen;
 public class ImagenRepository implements Iimagen{
 
 
-	public   int registerImagen(CrudImagenBE CrudImagenBE) {
+	public   BigInteger registerImagen(CrudImagenBE CrudImagenBE) {
 		// TODO Auto-generated method stub
 		return ImagenBL.registerImagen(CrudImagenBE);
 	}
 
 
-	public int tesinsert(CrudImagenBE CrudImagenBE) {
+	//public int tesinsert(CrudImagenBE CrudImagenBE) {
 		// TODO Auto-generated method stub
-		return  ImagenBL.tesinsert(CrudImagenBE);
-	}
+	//	return  ImagenBL.tesinsert(CrudImagenBE);
+	//}
 
 	
 	public List<Imagen> listaImagen() {
 		// TODO Auto-generated method stub
 		return ImagenBL.listImagen();
 	}
+
+
+
+
+
+	@Override
+	public BigInteger insertDetailImagen(ViewStockBE ViewStockBE) {
+		// TODO Auto-generated method stub
+		return ImagenBL.RegisterDetailImagen(ViewStockBE);
+	}
+
+
+	@Override
+	public int tesinsert(CrudImagenBE CrudImagenBE) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List<Detailimagen> ListaDetalleImagenXID(int idimagen) {
+		// TODO Auto-generated method stub
+		 return ImagenBL.ListaDetalleImagenXID(idimagen);
+	}
+
 
 }

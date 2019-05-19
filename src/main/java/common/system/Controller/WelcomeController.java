@@ -30,17 +30,20 @@ public class WelcomeController {
 	public ModelAndView welcome(ModelMap mod) {
 		  String url ="http://localhost:8083/sid?id=";
 		  List<Imagen> imf  = null;
-		 List<String> lsturlimagen= new ArrayList<String>();
+		 List<Imagen> lsturlimagen= new ArrayList<Imagen>();
 		  ImagenDa obj = new ImagenDa();
            stockClothes stockClothes= new stockClothes();
 			   mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
 			   mod.addAttribute("Mensaje", "Registra informacion basica");
 			   // model atribute para que retorne una lista de imagenes
 			   imf= obj.list();
+			  
 			   for (Imagen imagen : imf) {
-				   Integer s= imagen.getIdimagen();
-				   lsturlimagen.add(url+s);
+				 imagen.setUrl(url+imagen.getIdimagen());
+				 lsturlimagen.add(imagen);
 			}
+			   
+			
 			   mod.addAttribute("listaimagenes",lsturlimagen);
 			   ViewStockBE mdod = new ViewStockBE();
 			   Clothingline ob = new Clothingline();

@@ -31,6 +31,7 @@
    <script src="<c:url value="/static/js/jquery-2.1.4.min.js" />"></script>
        <script src="<c:url value="/static/js/jquery-ui.js" />"></script> 
    <script src="<c:url value="/static/js/bootstrap.js" />"></script>
+   
    <script src="<c:url value="/static/js/easy-responsive-tabs.js" />"></script>
      <script src="<c:url value="/static/js/imagezoom.js" />"></script>
      <script src="<c:url value="/static/js/jquery.countup.js" />"></script>
@@ -41,6 +42,7 @@
     <script src="<c:url value="/static/js/minicart.min.js" />"></script>  
     <script src="<c:url value="/static/js/modernizr.custom.js" />"></script>  
     <script src="<c:url value="/static/js/move-top.js" />"></script>  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="<c:url value="/static/js/gamachicas/home.js" />"></script> 
 
     

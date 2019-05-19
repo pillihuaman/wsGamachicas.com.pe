@@ -4,73 +4,50 @@
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
  
 
-  <div class="container">
-      <form:form method = "POST" action ="/addImagen" enctype="multipart/form-data">
-  <fieldset>
-    <div id="legend">
-      <legend class="">Registrar Informacion de la imagen</legend>
-    </div>
-    <div class="alert alert-warning" role="alert">
- Solo se puede registrar de 1 a 4 imagenes de un solo producto que representan las vistas de !
- Principal ,atras,Lateral, frontal.
-</div>
-    <div class="control-group">
-      <!-- Username -->
-      <label class="control-label"  for="Nombre">Nombre de la imagen:</label>
-      <div class="controls">
-      <form:input path = "Imagen.name" placeholder="Nombre de la imagen a guardar" class="form-control"/>
-        <p class="help-block">Nombre de la imagen solo letras</p>
-      </div>
-    </div>
-       <div class="control-group">
-      <!-- Username -->
-      <label class="control-label"  for="username">Linea de Ropa:</label>
-      <div class="controls">
-       <select name="Clothingline.idclothingline"  class="form-control">
-    <option value="-1">Selecionar..</option>
-    <c:forEach items="${ListClothesLine}" var="item">
-    <option value="<c:out value="${item.idclothingline}" />"><c:out value="${ item.name}" /></option>
-      </c:forEach>
-  </select>
-      </div>
-    </div>
-     <br>
-     <div class="control-group">
-     <label class="control-label">Vista que representa la Imagen</label>
-    <form:textarea path = "Test.idimagen" placeholder="Dreve descripcion de la imagen caracteristicas " class="form-control"/>
-    </div>
-     <br>
-    <div class="control-group">
-      <label class="control-label">Posición en la pagina principal</label>
-      <div class="controls">
-      <input type="number" name="Imagen.positionweb" min="1" max="9000" class="form-control">
-      </div>
-    </div>
-    <br>
-    <div class="control-group">
-      <label class="control-label">Descripción</label>
-      <div class="controls">
-  <form:textarea path = "Imagen.description" placeholder="Dreve descripcion de la imagen caracteristicas " class="form-control"/>
-      </div>
-    </div>
- <br>
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-      <input type="submit" class="btn btn-success" value="Registrar">
-      
-      </div>
-    </div>
-  </fieldset>
-     
+
            
-      <div class="form-group">
-        <label>Select File</label> 
-        <input class="form-control" type="file" name="file">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Upload</button>
-      </div>
-  </form:form>
-            </div>
-           
+  <c:forEach items="${listaimagenes}" var="item">
+    
+    	<div class="col-md-3 product-men">
+								<div class="men-pro-item simpleCart_shelfItem">
+									<div class="men-thumb-item">
+										<img src="<c:url value="${item}"/>"  alt="" class="pro-image-front">
+										<img src="${item}" alt="" class="pro-image-back">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+												
+										<a href="<c:url value="/DetallaImagen?id=4334"/>" class="link-product-add-cart" ">Ver Detalle</a>
+									   <a href="<c:url value="/DetallaImagen?id=4334"/>" >hello</a>
+												
+												</div>
+
+											</div>
+											<span class="product-new-top">New</span>
+											
+									</div>
+									<div class="item-info-product ">
+										<h4><a href="single.html">Gabi Full Sleeve Sweatshirt</a></h4>
+										<div class="info-product-price">
+											<span class="item_price">$45.99</span>
+											<del>$69.71</del>
+										</div>
+										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+															<form action="#" method="post">
+																<fieldset>
+																	<input type="hidden" name="cmd" value="_cart" />
+																	<input type="hidden" name="add" value="1" />
+																	<input type="hidden" name="business" value=" " />
+																	<input type="hidden" name="item_name" value="Sweatshirt" />
+																	<input type="hidden" name="amount" value="30.99" />
+																	<input type="hidden" name="discount_amount" value="1.00" />
+																	<input type="hidden" name="currency_code" value="USD" />
+																	<input type="hidden" name="return" value=" " />
+																	<input type="hidden" name="cancel_return" value=" " />
+																	<input type="submit" name="submit" value="Pedir" class="button" />
+																</fieldset>
+															</form>
+														</div> 
+														</div>
+														</div>
+														</div>
+</c:forEach>
