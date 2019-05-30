@@ -172,7 +172,7 @@ public class ImagenDa {
      	return result;	
     	
     }
-    public  static List<Detailimagen>  ListaDetalleImagenXID(int idimagen) 
+    public  static List<Detailimagen>  ListaDetalleImagenXID(BigInteger idimagen) 
     {
 
       	 List<Detailimagen> result= null;
@@ -202,3 +202,4 @@ public class ImagenDa {
     }
 
 }
+   

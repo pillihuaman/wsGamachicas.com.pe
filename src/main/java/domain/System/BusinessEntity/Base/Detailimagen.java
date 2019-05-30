@@ -1,6 +1,8 @@
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -10,7 +12,6 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="detailimagen")
 @NamedQuery(name="Detailimagen.findAll", query="SELECT d FROM Detailimagen d")
 public class Detailimagen implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,15 +20,17 @@ public class Detailimagen implements Serializable {
 	private int idDetailImagen;
 
 	private Timestamp createdate;
-	@Column(name="DESCRIPTION")
+
 	private String descripcion;
 
-	private int idimagen;
+	private BigInteger idimagen;
 
 	@Lob
 	private byte[] imagendata;
+
 	@Column(name="STATUS")
-	private byte status;
+	private Object status;
+	//private byte status;
 
 	private Timestamp updatedate;
 
@@ -62,11 +65,11 @@ public class Detailimagen implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public int getIdimagen() {
+	public BigInteger getIdimagen() {
 		return this.idimagen;
 	}
 
-	public void setIdimagen(int idimagen) {
+	public void setIdimagen(BigInteger idimagen) {
 		this.idimagen = idimagen;
 	}
 
@@ -78,11 +81,11 @@ public class Detailimagen implements Serializable {
 		this.imagendata = imagendata;
 	}
 
-	public byte getStatus() {
+	public Object getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(Object status) {
 		this.status = status;
 	}
 

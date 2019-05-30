@@ -13,17 +13,6 @@
 									<div class="men-thumb-item">
 										<img src="<c:url value="${item}"/>"  alt="" class="pro-image-front">
 										<img src="${item}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-												
-										<a href="<c:url value="/DetallaImagen?id=4334"/>" class="link-product-add-cart" ">Ver Detalle</a>
-									   <a href="<c:url value="/DetallaImagen?id=4334"/>" >hello</a>
-												
-												</div>
-
-											</div>
-											<span class="product-new-top">New</span>
-											
 									</div>
 									<div class="item-info-product ">
 										<h4><a href="single.html">Gabi Full Sleeve Sweatshirt</a></h4>
