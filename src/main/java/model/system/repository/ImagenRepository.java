@@ -1,6 +1,8 @@
 package model.system.repository;
 
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
@@ -35,7 +37,7 @@ public class ImagenRepository implements Iimagen{
 
 
 	@Override
-	public BigInteger insertDetailImagen(ViewStockBE ViewStockBE) {
+	public int insertDetailImagen(ViewStockBE ViewStockBE) {
 		// TODO Auto-generated method stub
 		return ImagenBL.RegisterDetailImagen(ViewStockBE);
 	}
@@ -52,6 +54,20 @@ public class ImagenRepository implements Iimagen{
 	public List<Detailimagen> ListaDetalleImagenXID(int idimagen) {
 		// TODO Auto-generated method stub
 		 return ImagenBL.ListaDetalleImagenXID(idimagen);
+	}
+
+
+	@Override
+	public int InsertImagen(CrudImagenBE CrudImagenBE) throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		return ImagenBL.InsertImagen(CrudImagenBE);
+	}
+
+
+	@Override
+	public int InsertDetalleImagen(ViewStockBE ViewStockBE) throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		return ImagenBL.InsertDetalleImagen(ViewStockBE);
 	}
 
 

@@ -3,7 +3,9 @@ package domain.System.BusinessEntity.BusinessLogic;
 
 
 import java.awt.Image;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
@@ -35,9 +37,17 @@ public class ImagenBL {
 	    { 
 	        return ImagenDa.list();
 	    }
-	  public static  BigInteger RegisterDetailImagen(ViewStockBE ViewStockBE) 
+	  public static  int RegisterDetailImagen(ViewStockBE ViewStockBE) 
 	    { 
 	        return ImagenDa.RegisterDetailImagen(ViewStockBE);
+	    }
+	  public static  int   InsertImagen( CrudImagenBE CrudImagenBE) throws SQLException, IOException 
+	    { 
+	        return ImagenDa.InsertImagen(CrudImagenBE);
+	    }
+	  public static  int   InsertDetalleImagen( ViewStockBE ViewStockBE) throws SQLException, IOException 
+	    { 
+	        return ImagenDa.InsertDetalleImagen(ViewStockBE);
 	    }
 
 }

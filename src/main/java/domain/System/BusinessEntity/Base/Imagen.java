@@ -1,6 +1,7 @@
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 

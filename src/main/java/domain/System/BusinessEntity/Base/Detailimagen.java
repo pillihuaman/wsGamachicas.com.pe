@@ -1,7 +1,6 @@
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -23,7 +22,7 @@ public class Detailimagen implements Serializable {
 
 	private String descripcion;
 
-	private BigInteger idimagen;
+	private int idimagen;
 
 	@Lob
 	private byte[] imagendata;
@@ -65,11 +64,11 @@ public class Detailimagen implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public BigInteger getIdimagen() {
+	public int getIdimagen() {
 		return this.idimagen;
 	}
 
-	public void setIdimagen(BigInteger idimagen) {
+	public void setIdimagen(int idimagen) {
 		this.idimagen = idimagen;
 	}
 

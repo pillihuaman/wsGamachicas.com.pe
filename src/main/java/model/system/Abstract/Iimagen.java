@@ -1,6 +1,9 @@
 package model.system.Abstract;
 
+
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
@@ -15,6 +18,7 @@ public interface Iimagen {
 	int tesinsert (CrudImagenBE CrudImagenBE);
 	List<Imagen> listaImagen ();
 	List<Detailimagen>  ListaDetalleImagenXID(int idimagen); 
-	BigInteger insertDetailImagen (ViewStockBE ViewStockBE);
-	  
+	int insertDetailImagen (ViewStockBE ViewStockBE);
+	int   InsertImagen( CrudImagenBE CrudImagenBE) throws SQLException, IOException;
+	int   InsertDetalleImagen( ViewStockBE ViewStockBE) throws SQLException, IOException; 
 }

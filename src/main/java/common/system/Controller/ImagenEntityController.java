@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,8 @@ public class ImagenEntityController {
 		@RequestMapping(value = "/addImagen", method = RequestMethod.POST)
 		   public String singleFileUpload(@ModelAttribute("command")ViewStockBE ViewStockBE,@RequestParam("files") MultipartFile[]  files,
                    RedirectAttributes redirectAttributes) throws IOException {
-			BigInteger idiamgen=null;
-			BigInteger idiamgendetail=null;
+			int  idiamgen=0;
+			int idiamgendetail=0;
 			  for (int i = 0; i < files.length; i++) {
 		            MultipartFile file = files[0];
 		           // String description = descriptions[i];
@@ -114,9 +115,15 @@ public class ImagenEntityController {
 		        	crud.setImagen(ViewStockBE.getImagen());
 		        	crud.setTest(ViewStockBE.getTest());
 		        	//int test=insert.tesinsert(crud);
-		        	 idiamgen=insert.registerImagen(crud);
+		        	 //idiamgen=insert.registerImagen(crud);
+		        	 try {
+						idiamgen=insert.InsertImagen(crud);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		        	}
-		        	 if(idiamgen!= null)
+		        	 if(idiamgen== 0)
 		        		 {
 		        		 if(i>=0)
 		        		 { 
@@ -132,7 +139,12 @@ public class ImagenEntityController {
 		        		    det.setDescripcion("Imagen numero "+i);
 		        		    det.setImagendata(bytess);
 		        		    detalleimagen.setDetailimagen(det);
-		        		    idiamgendetail=insertdet.insertDetailImagen(detalleimagen);
+		        		    try {
+								idiamgendetail=insertdet.InsertDetalleImagen(detalleimagen);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 		        			 //Insertamos detalle de la imagen  
 		        		 //}
 		        		 }
@@ -182,7 +194,7 @@ public class ImagenEntityController {
 				   imf= obj.ListaDetalleImagenXID(idimagent);
 				   
 				   for (Detailimagen imagen : imf) {
-					   Integer s= imagen.getIdDetailImagen();
+					   int s= imagen.getIdDetailImagen();
 					   lsturlimagen.add(url+s);
 				}
 				   mod.addAttribute("listaimagenes",lsturlimagen);
