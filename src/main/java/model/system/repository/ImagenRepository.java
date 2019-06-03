@@ -71,4 +71,11 @@ public class ImagenRepository implements Iimagen{
 	}
 
 
+	@Override
+	public List<Detailimagen> lstIDdetalle(int iddetalleimagen) {
+		// TODO Auto-generated method stub
+		return ImagenBL.lstIDdetalle(iddetalleimagen);
+	}
+
+
 }

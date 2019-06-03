@@ -18,6 +18,7 @@ public interface Iimagen {
 	int tesinsert (CrudImagenBE CrudImagenBE);
 	List<Imagen> listaImagen ();
 	List<Detailimagen>  ListaDetalleImagenXID(int idimagen); 
+	List<Detailimagen>  lstIDdetalle(int iddetalleimagen);
 	int insertDetailImagen (ViewStockBE ViewStockBE);
 	int   InsertImagen( CrudImagenBE CrudImagenBE) throws SQLException, IOException;
 	int   InsertDetalleImagen( ViewStockBE ViewStockBE) throws SQLException, IOException; 

@@ -213,6 +213,34 @@ public class ImagenDa {
      	return result;	
     	
     }
+    public  static List<Detailimagen>  lstIDdetalle(int iddetalleimagen) 
+    {
+
+      	 List<Detailimagen> result= null;
+     	try {
+ 			Class.forName("com.mysql.jdbc.Driver");
+ 		} catch (ClassNotFoundException e1) {
+ 			e1.printStackTrace();
+ 		} 
+     	try {
+ 			EntityDBConnection conne= MySqlAdapter.getConnectionString();
+ 			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+ 	          String sql ="select * from gamachicas.detailimagen det where det.IdDetailImagen= :iddetalleimagen;";
+ 	          try (org.sql2o.Connection con =  sql2o.open()){
+ 	        	     result = con
+ 	        	            .createQuery(sql)
+ 	        	            .addParameter("iddetalleimagen", iddetalleimagen)
+ 	        	            .executeAndFetch(Detailimagen.class);
+ 	        	  
+ 	          }
+ 			return result;
+ 		} catch (IOException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+     	return result;	
+    	
+    }
     public static  int   InsertImagen( CrudImagenBE CrudImagenBE)
 			throws SQLException, IOException {
     	 int idimagen=0;
@@ -235,12 +263,22 @@ public class ImagenDa {
 			callableStatement.setString(8, CrudImagenBE.getImagen().getDescription());
 			callableStatement.setInt(9, CrudImagenBE.getImagen().getIdclothingline());
 			callableStatement.registerOutParameter(10,java.sql.Types.INTEGER);   
-		    callableStatement.executeUpdate();
-		    ResultSet rs = callableStatement.getGeneratedKeys();
-		    if (rs.next()){
-		    	idimagen=rs.getInt(10);
-		    }
-		    
+		    //callableStatement.executeUpdate();
+		    boolean hasresult= callableStatement.execute();
+		    //ResultSet rs = callableStatement.getGeneratedKeys();
+		    if (hasresult)
+	        {
+	        try (ResultSet myRs = callableStatement.getResultSet())
+	        {
+	            while (myRs.next())
+	            {
+	            	idimagen = myRs.getInt("idimagen");
+
+	                System.out.print(idimagen);
+	            }//end of while
+
+	        }//end of resultset
+	        }
 		    
 				   //ResultSet resultSet = callableStatement.getResultSet();
                 //while (resultSet.next()) {
@@ -272,17 +310,26 @@ public class ImagenDa {
 		 	callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
 		 	callableStatement.setInt(1,  ViewStockBE.getDetailimagen().getIdimagen());
 			callableStatement.setString(2, ViewStockBE.getDetailimagen().getDescripcion());
-			callableStatement.setInt(3,  ViewStockBE.getDetailimagen().getVista());
+			callableStatement.setInt(3, ViewStockBE.getDetailimagen().getVista());
 			callableStatement.setBytes(4, ViewStockBE.getDetailimagen().getImagendata());
 			//callableStatement.setInt(5, " ");
 			//callableStatement.setBoolean(5,  true);
 			callableStatement.registerOutParameter(5,java.sql.Types.INTEGER);   
-		    callableStatement.executeUpdate();
-		    ResultSet rs = callableStatement.getGeneratedKeys();
-		    if (rs.next()){
-		    	idimagen=rs.getInt(5);
-		    }
-		    
+		    boolean hasresult= callableStatement.execute();
+		    //ResultSet rs = callableStatement.getGeneratedKeys();
+		    if (hasresult)
+	        {
+	        try (ResultSet myRs = callableStatement.getResultSet())
+	        {
+	            while (myRs.next())
+	            {
+	            	idimagen = myRs.getInt("IdDetailImagen");
+
+	                System.out.print(idimagen);
+	            }//end of while
+
+	        }//end of resultset
+	        }//e
 		    
 				   //ResultSet resultSet = callableStatement.getResultSet();
                 //while (resultSet.next()) {

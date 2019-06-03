@@ -33,6 +33,10 @@ public class ImagenBL {
 	    { 
 	        return ImagenDa.ListaDetalleImagenXID(idimagen);
 	    }
+	  public static  List<Detailimagen>  lstIDdetalle(int iddetalleimagen) 
+	    { 
+	        return ImagenDa.lstIDdetalle(iddetalleimagen);
+	    }
 	  public static  List<Imagen> listImagenXID(int idimagen) 
 	    { 
 	        return ImagenDa.list();

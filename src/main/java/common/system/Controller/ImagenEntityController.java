@@ -36,6 +36,7 @@ import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
+import domain.System.BusinessEntity.BusinessLogic.ImagenBL;
 import model.system.repository.ImagenRepository;
 import model.system.repository.stockClothes;
 import repository.System.DataAccess.MySql.ImagenDa;
@@ -56,6 +57,26 @@ public class ImagenEntityController {
  	       //getimg
 	       imf= obj.getimg(idimagen);
 	        for (Imagen imagen : imf) {
+	         bytes=imagen.getImagendata(); 
+			}
+	        return ResponseEntity
+	                .ok()
+	                .contentType(MediaType.IMAGE_JPEG)
+	                .body(bytes);
+	    }
+	 
+	    @RequestMapping(value = "/siddetalle", method = RequestMethod.GET,
+	            produces = MediaType.IMAGE_JPEG_VALUE)
+	    public ResponseEntity<byte[]> getImagedetalle(@RequestParam("id") int iddetalleimagen) throws IOException {
+	    	System.out.println("ID is " + iddetalleimagen);
+	    	ClassPathResource imgFile = new ClassPathResource("image/ropa.jpeg");
+	        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
+	        ImagenBL obj = new ImagenBL();
+	        List<Detailimagen>  imf  =  null;
+	        //byte[] bytes= null;
+ 	       //getimg
+	       imf= obj.lstIDdetalle(iddetalleimagen);
+	        for (Detailimagen imagen : imf) {
 	         bytes=imagen.getImagendata(); 
 			}
 	        return ResponseEntity
@@ -183,7 +204,7 @@ public class ImagenEntityController {
 		   public ModelAndView DetallaImagen(@RequestParam("id") int idimagen, ModelMap mod) {
 	    	int idimagent=idimagen;
 	    	
-	    	  String url ="http://localhost:8083/sid?id=";
+	    	  String url ="http://localhost:8083/siddetalle?id=";
 			  List<Detailimagen> imf  = null;
 			 List<String> lsturlimagen= new ArrayList<String>();
 			 ImagenRepository obj = new ImagenRepository();
