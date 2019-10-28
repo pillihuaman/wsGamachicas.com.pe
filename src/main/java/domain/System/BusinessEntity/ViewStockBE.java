@@ -1,10 +1,11 @@
 package domain.System.BusinessEntity;
 import domain.System.BusinessEntity.Base.*;
 public class ViewStockBE {
-	private  Clothing  Clothing;
+	   private  Clothing  Clothing;
 	   private Color Color;
-
 	   private Clothingline Clothingline;
+	   private Detailimagen Detailimagen;
+	 
       public Detailimagen getDetailimagen() {
 		return Detailimagen;
 	}
@@ -13,7 +14,7 @@ public class ViewStockBE {
 		Detailimagen = detailimagen;
 	}
 
-	private Detailimagen Detailimagen;
+
 	   public Imagen getImagen() {
 		return Imagen;
 	}

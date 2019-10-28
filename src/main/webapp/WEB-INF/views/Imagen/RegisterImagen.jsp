@@ -21,36 +21,17 @@
  Solo se puede registrar de 1 a 4 imagenes de un solo producto que representan las vistas de !
  Principal ,atras,Lateral, frontal.
 </div>
-    <div class="control-group">
-      <!-- Username -->
-      <label class="control-label"  for="Nombre">Nombre de la imagen:</label>
-      <div class="controls">
-      <form:input path = "Imagen.name" placeholder="Nombre de la imagen a guardar" class="form-control"/>
-        <p class="help-block">Nombre de la imagen solo letras</p>
-      </div>
-    </div>
+    
        <div class="control-group">
       <!-- Username -->
-      <label class="control-label"  for="username">Linea de Ropa:</label>
+      <label class="control-label"  for="username">Ropas</label>
       <div class="controls">
-       <select name="Clothingline.idclothingline"  class="form-control">
+       <select name="Imagen.idimagen"  class="form-control">
     <option value="-1">Selecionar..</option>
-    <c:forEach items="${ListClothesLine}" var="item">
-    <option value="<c:out value="${item.idclothingline}" />"><c:out value="${ item.name}" /></option>
+    <c:forEach items="${ListClothes}" var="item">
+    <option value="<c:out value="${item.idimagen}" />"><c:out value="${item.name}" /></option>
       </c:forEach>
   </select>
-      </div>
-    </div>
-     <br>
-     <div class="control-group">
-     <label class="control-label">Vista que representa la Imagen</label>
-    <form:textarea path = "Test.idimagen" placeholder="Dreve descripcion de la imagen caracteristicas " class="form-control"/>
-    </div>
-     <br>
-    <div class="control-group">
-      <label class="control-label">Posición en la pagina principal</label>
-      <div class="controls">
-      <input type="number" name="Imagen.positionweb" min="1" max="9000" class="form-control">
       </div>
     </div>
     <br>
@@ -79,13 +60,6 @@
         <br>
         <div class="control-group">
       <label class="control-label">Foto Lateral Derecho</label>
-      <div class="controls">
-        <input class="form-control" type="file" name="files">
-      </div>
-    </div>
-        <br>
-        <div class="control-group">
-      <label class="control-label">Foto Lateral izquierdo</label>
       <div class="controls">
         <input class="form-control" type="file" name="files">
       </div>

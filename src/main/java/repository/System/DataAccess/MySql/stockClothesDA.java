@@ -1,4 +1,5 @@
-package repository.System.DataAccess.MySql;
+ package repository.System.DataAccess.MySql;
+import domain.System.BusinessEntity.Base.Clothing;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.ViewStockBE;
@@ -33,6 +34,31 @@ public class stockClothesDA {
 	        	            .createQuery(sql)
 	        	            //.addParameter("idclothing", 1)
 	        	            .executeAndFetch(Clothingline.class);
+	          }
+			return result;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return result;
+    } 
+    public  static List<Imagen> ListClothes() 
+    {
+    	 List<Imagen> result=null;
+    	try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} 
+    	try {
+			EntityDBConnection conne= MySqlAdapter.getConnectionString();
+			 Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+	          String sql ="select idimagen,name from Gamachicas.imagen where STATUS !=0;";
+	          try (org.sql2o.Connection con =  sql2o.open()){
+	        	              result = con
+	        	            .createQuery(sql)
+	        	            //.addParameter("idclothing", 1)
+	        	            .executeAndFetch(Imagen.class);
 	          }
 			return result;
 		} catch (IOException e) {

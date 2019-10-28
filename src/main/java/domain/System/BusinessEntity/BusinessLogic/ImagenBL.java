@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
+import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
@@ -53,5 +54,9 @@ public class ImagenBL {
 	    { 
 	        return ImagenDa.InsertDetalleImagen(ViewStockBE);
 	    }
-
+	  public static  int   InsertProduct( ViewProductBE ViewProductBE) throws SQLException, IOException 
+	    { 
+	        return ImagenDa.InsertProduct(ViewProductBE);
+	    }
+	  
 }

@@ -4099,8 +4099,8 @@ p.w3ls_para {
 		padding: 15px 0 30px 0;
 	}
 	.carousel-caption {
-		min-height: 400px!important;
-		padding-top: 7em;
+		min-height: 150px!important;
+		padding-top: 3em;
 	}
 	.modal_body_right.modal_body_right1 img {
 		margin-top: 1em;

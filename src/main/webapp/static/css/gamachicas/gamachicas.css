@@ -1,0 +1,44 @@
+
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 80px;
+  height: 80px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 800px;
+  height: 500px;
+}
+
+.myresultdo {
+
+  background-image: url(http://localhost:8083/siddetalle?id=2);
+
+}
+.imgborder
+{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-style: inset;
+}
+.imgmain
+{
+   
+    width: 500px;
+    height: 650px;
+
+  padding: 10px;
+  padding-bottom: 9px;
+    padding-top: 9px;
+}
+

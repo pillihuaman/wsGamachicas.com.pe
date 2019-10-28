@@ -36,6 +36,19 @@ public class Detailimagen implements Serializable {
 	private String url;
 
 	private int vista;
+	public int getIdGroupparemeter() {
+		return IdGroupparemeter;
+	}
+
+	public void setIdGroupparemeter(int idGroupparemeter) {
+		IdGroupparemeter = idGroupparemeter;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	private int IdGroupparemeter; 
 
 	public Detailimagen() {
 	}

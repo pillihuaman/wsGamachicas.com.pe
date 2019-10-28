@@ -17,14 +17,28 @@
  <link href="<c:url value="/static/css/jquery-ui.css" />" rel="stylesheet">   
  <link href="<c:url value="/static/css/font-awesome.css" />" rel="stylesheet">   
  <link href="<c:url value="/static/css/flexslider.css" />" rel="stylesheet">   
- <link href="<c:url value="/static/css/easy-responsive-tabs.css" />" rel="stylesheet">   
+ <link href="<c:url value="/static/css/easy-responsive-tabs.css" />" rel="stylesheet">
+   
+  <link href="<c:url value="/static/css/main/font-awesome.min.css" />" rel="stylesheet"> 
+  <link href="<c:url value="/static/css/main/jquery-ui.custom.min.css" />" rel="stylesheet"> 
+  <link href="<c:url value="/static/css/main/chosen.min.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/bootstrap-datetimepicker.min.css" />" rel="stylesheet"> 
+  <link href="<c:url value="/static/css/main/bootstrap-datepicker3.min.css" />" rel="stylesheet"> 
+  <link href="<c:url value="/static/css/main/daterangepicker.min.css" />" rel="stylesheet"> 
+  <link href="<c:url value="/static/css/main/bootstrap-timepicker.min.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/bootstrap-colorpicker.min.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/fonts.googleapis.com.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/ace.min.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/ace-skins.min.css" />" rel="stylesheet"> 
+   <link href="<c:url value="/static/css/main/ace-rtl.min.css" />" rel="stylesheet"> 
  <link href="<c:url value="/static/css/gamachicas/gamachicas.css" />" rel="stylesheet">
+ 
 
     </head>    
     <body>    
             <div><tiles:insertAttribute name="header" /></div>    
               
-            <div style="float:left;padding:10px;width:80%;border-left:1px solid pink;">    
+            <div style="float:left;padding:10px;width:100%;border-left:1px solid pink;">    
             <tiles:insertAttribute name="body" /></div>    
             <div style="clear:both"><tiles:insertAttribute name="footer" /></div>    
 
@@ -42,10 +56,9 @@
     <script src="<c:url value="/static/js/minicart.min.js" />"></script>  
     <script src="<c:url value="/static/js/modernizr.custom.js" />"></script>  
     <script src="<c:url value="/static/js/move-top.js" />"></script>  
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="<c:url value="/static/js/gamachicas/home.js" />"></script> 
-
-    
-    
+    <script src="<c:url value="/static/js/gamachicas/jspFotos/jsfotos.js" />"></script> 
+     
     </body>    
     </html>    

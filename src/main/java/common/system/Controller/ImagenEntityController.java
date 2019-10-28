@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import domain.System.BusinessEntity.CrudImagenBE;
+import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
@@ -91,7 +92,7 @@ public class ImagenEntityController {
 		@RequestMapping(value = "/addImagen", method = RequestMethod.POST)
 		   public String singleFileUpload(@ModelAttribute("command")ViewStockBE ViewStockBE,@RequestParam("files") MultipartFile[]  files,
                    RedirectAttributes redirectAttributes) throws IOException {
-			int  idiamgen=0;
+			int  idiamgen=ViewStockBE.getImagen().getIdimagen();
 			int idiamgendetail=0;
 			  for (int i = 0; i < files.length; i++) {
 		            MultipartFile file = files[0];
@@ -111,41 +112,8 @@ public class ImagenEntityController {
 
 		        try {
 
-		        	if(i==0)
-		        	{
-		            // Get the file and save it somewhere
-		           // byte[] bytes = file.getBytes();
-		            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-		            Files.write(path, bytes);
-		            
-		            //zph
-		        	ViewStockBE objs= new ViewStockBE();
-		    		ImagenRepository insert= new ImagenRepository();
-		        	stockClothes stockClothes= new stockClothes();
-		        	Imagen img = new Imagen();
-		        	img.setImagendata(bytes);
-		        	img.setCreatedate(ViewStockBE.getImagen().getCreatedate());
-		           	img.setCountViews(ViewStockBE.getImagen().getCountViews());
-		           	img.setDescription(ViewStockBE.getImagen().getDescription());
-		           	img.setIdposition(ViewStockBE.getImagen().getIdposition());
-		           	img.setPositionweb(ViewStockBE.getImagen().getPositionweb());
-		        	img.setName(ViewStockBE.getImagen().getName());
-		        	ViewStockBE.setImagen(img);
-		        	CrudImagenBE crud= new CrudImagenBE();
-		        	crud.setClothingline(ViewStockBE.getClothingline());
-		        	crud.setImagen(ViewStockBE.getImagen());
-		        	crud.setTest(ViewStockBE.getTest());
-		        	//int test=insert.tesinsert(crud);
-		        	 //idiamgen=insert.registerImagen(crud);
-		        	 try {
-						idiamgen=insert.InsertImagen(crud);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		        	}
-		        	 if(idiamgen== 0)
-		        		 {
+		        
+		        	
 		        		 if(i>=0)
 		        		 { 
 		        			 //if( file.isEmpty())
@@ -169,8 +137,7 @@ public class ImagenEntityController {
 		        			 //Insertamos detalle de la imagen  
 		        		 //}
 		        		 }
-		        		 
-		        		 }		 
+		        		 	 
 		        	 
 		        	//zph
 
@@ -185,16 +152,84 @@ public class ImagenEntityController {
 		        return "uploadStatus";
 
 		   }
+		@RequestMapping(value = "/addImagenDetail", method = RequestMethod.POST)
+		   public String addImagenDetail(@ModelAttribute("command")ViewStockBE ViewStockBE,@RequestParam("files") MultipartFile[]  files,
+                RedirectAttributes redirectAttributes) throws IOException {
+			int  idiamgen=ViewStockBE.getImagen().getIdimagen();
+			int idiamgendetail=0;
+			  for (int i = 0; i < files.length; i++) {
+		            MultipartFile file = files[0];
+		           // String description = descriptions[i];
+		      
+		                byte[] bytes = file.getBytes();
+		                
+		                if (file.isEmpty()) {
+				            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+				            return "redirect:uploadStatus";
+				        }
+
+			   if (file.isEmpty()) {
+		            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+		            return "redirect:uploadStatus";
+		        }
+
+		        try {
+
+		        
+		        	
+		        		 if(i>=0)
+		        		 { 
+		        			 //if( file.isEmpty())
+		        			 //{
+		        			ViewStockBE detalleimagen = new ViewStockBE();
+		        		    Detailimagen  det = new Detailimagen();
+		        		    ImagenRepository insertdet= new ImagenRepository();
+		        		    MultipartFile filees = files[i];
+	        			    byte[] bytess = filees.getBytes();
+	        			  if (bytess.length>0)
+	        			  {
+		        		    det.setIdimagen(idiamgen);
+		        		    det.setVista(i);
+		        		    det.setDescripcion("Imagen numero "+i);
+		        		    det.setImagendata(bytess);
+		        		    detalleimagen.setDetailimagen(det);
+		        		    try {
+								idiamgendetail=insertdet.InsertDetalleImagen(detalleimagen);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+	        			  }
+		        			 //Insertamos detalle de la imagen  
+		        		 //}
+		        		 }
+		        		 	 
+		        	 
+		        	//zph
+
+              redirectAttributes.addFlashAttribute("message",
+		                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+
+			  }
+		        return "uploadStatus";
+
+		   }
+		
 		
 		
 	    @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
 		   public ModelAndView upload( ModelMap mod) {
                stockClothes stockClothes= new stockClothes();
-			   mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
+			   //mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
+               mod.addAttribute("ListClothes", stockClothes.ListClothes());
 			   mod.addAttribute("Mensaje", "Registra informacion basica");
 			   ViewStockBE mdod = new ViewStockBE();
 			   Clothingline ob = new Clothingline();
-			   Imagen img = new Imagen();
+			    Imagen img = new Imagen();
 			   mdod.setClothingline(ob);
 			   mdod.setImagen(img);
 	    	 return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
@@ -230,5 +265,19 @@ public class ImagenEntityController {
 			}
 	    	 return new ModelAndView("DetallaImagen", "command", new ViewStockBE());
 	    }
-    	   
+    
+	    
+	    
+	    @RequestMapping(value = "/registerdetalleProduct", method = RequestMethod.GET)
+		   public ModelAndView registerProduct( ModelMap mod) {
+	          stockClothes stockClothes= new stockClothes();
+	          mod.addAttribute("ListClothes", stockClothes.ListClothes());
+			   //mod.addAttribute("Mensaje", "Registra informacion basica");
+			   //ViewStockBE mdod = new ViewStockBE();
+			   //Clothingline ob = new Clothingline();
+			   //Imagen img = new Imagen();
+			   //mdod.setClothingline(ob);
+			   //mdod.setImagen(img);
+	    	 return new ModelAndView("registerdetalleProduct", "command", new ViewProductBE());
+	    }
 }

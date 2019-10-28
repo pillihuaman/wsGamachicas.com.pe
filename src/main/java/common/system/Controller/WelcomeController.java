@@ -10,11 +10,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import common.system.ViewModel.ListProductViewModel;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Imagen;
+import domain.System.BusinessEntity.Base.Producto;
 import model.system.repository.stockClothes;
 //import model.system.repository.stockClothes;
 import repository.System.DataAccess.MySql.ImagenDa;
@@ -29,6 +32,7 @@ public class WelcomeController {
 	@RequestMapping("/")
 	public ModelAndView welcome(ModelMap mod) {
 		  String url ="http://localhost:8083/sid?id=";
+		  ListaProducto();
 		  List<Imagen> imf  = null;
 		 List<Imagen> lsturlimagen= new ArrayList<Imagen>();
 		  ImagenDa obj = new ImagenDa();
@@ -61,19 +65,27 @@ public class WelcomeController {
 		}
         return new ModelAndView("home", "command", new ViewStockBE());
 	}
-	  // @RequestMapping(value = "/RegisterImagen", method = RequestMethod.GET)
-	   //public ModelAndView student( ModelMap mod) {
-		   //stockClothes stockClothes= new stockClothes();
-		   //mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
-		   //mod.addAttribute("Mensaje", "Registra informacion basica");
-		   //ViewStockBE mdod = new ViewStockBE();
-		   //Clothingline ob = new Clothingline();
-		   //Imagen img = new Imagen();
-		   //mdod.setClothingline(ob);
-		   //mdod.setImagen(img);
-		   
-		 //  return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
-		   
-	   //}
+	  private void ListaProducto() {
+	{
+		 try
+		 {
+			    final String uri = "http://localhost:8080/WebService/ListaProducto";
+
+			    RestTemplate restTemplate = new RestTemplate();
+			    Producto  result = restTemplate.getForObject(uri, Producto.class);
+			    System.out.println(result);	
+			    
+			 
+			 
+		 }
+		 catch (Exception e) {
+			  throw e;
+			// TODO: handle exception
+		}
+	}
+
+}
+
+
 
 }

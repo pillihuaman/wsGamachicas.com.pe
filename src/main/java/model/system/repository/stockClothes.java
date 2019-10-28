@@ -1,7 +1,9 @@
 package model.system.repository;
 import domain.System.BusinessEntity.BusinessLogic.stockClothesBL;
 import domain.System.BusinessEntity.ViewStockBE;
+import domain.System.BusinessEntity.Base.Clothing;
 import domain.System.BusinessEntity.Base.Clothingline;
+import domain.System.BusinessEntity.Base.Imagen;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +23,10 @@ public class stockClothes implements IstockClothes{
 	public  List<Clothingline> ListClothesLine() {
 		return stockClothesBL.ListClothesLine();
 	}
+	public  List<Imagen> ListClothes() {
+		return stockClothesBL.ListClothes();
+	}
+
 
     
 }

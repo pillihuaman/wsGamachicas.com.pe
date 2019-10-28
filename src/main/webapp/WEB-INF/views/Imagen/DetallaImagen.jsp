@@ -1,42 +1,149 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
- 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<div class="form-group row">
+	<div class="col-sm-2">
+		<c:forEach items="${listaimagenes}" var="item" varStatus="myIndex">
+
+			<div class="">
+
+				<img id="img${myIndex.index}" name="img${myIndex.index}"
+					onclick="MostrarImagen(this.id)" width="160PX" height="160PX"
+					src="<c:url value="${item}"/>" alt="" class="pro-image-front">
+			</div>
+		</c:forEach>
+	</div>
+	<div class="col-sm-6">
+		<div id="myresultdo" class="img-zoom-result myresultdo imgmain center"></div>
+	</div>
+	<div class="col-sm-3">
+
+		<ul class="list-unstyled spaced">
+
+			<li>
+
+				<h1>Cafarenas</h1>
+			</li>
+			<li>
+				<div class="rating inline" style="cursor: pointer;">
+
+					<i data-alt="1" class="star-off-png" title="bad"> </i>&nbsp;<i
+						data-alt="2" class="star-off-png" title="Malo"> </i>&nbsp;<i
+						data-alt="3" class="star-off-png" title="Regular"> </i>&nbsp;<i
+						data-alt="4" class="star-off-png" title="Bueno"> </i>&nbsp;<i
+						data-alt="5" class="star-off-png" title="Excelente"> </i><input
+						name="score" type="hidden">
+				</div>
+			</li>
+
+			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
+				al mayor : <span class="badge badge-danger">12 s/.</span></li>
+			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
+				al menor : <span class="badge badge-danger">7 s/.</span></li>
 
 
-           
-  <c:forEach items="${listaimagenes}" var="item">
-    
-    	<div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="<c:url value="${item}"/>"  alt="" class="pro-image-front">
-										<img src="${item}" alt="" class="pro-image-back">
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="single.html">Gabi Full Sleeve Sweatshirt</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$45.99</span>
-											<del>$69.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="Sweatshirt" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Pedir" class="button" />
-																</fieldset>
-															</form>
-														</div> 
-														</div>
-														</div>
-														</div>
-</c:forEach>
+		</ul>
+
+
+	</div>
+</div>
+
+<div class="page-content">
+
+
+	<div class="page-header">
+		<h1>Galleria de Modelos</h1>
+	</div>
+	<!-- /.page-header -->
+
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div>
+				<ul class="ace-thumbnails clearfix">
+					<li><img id="imgbox" width="150" height="150" alt="150x150"
+						src="http://localhost:8083/siddetalle?id=7" onclick="zoomout();">
+
+
+					</li>
+
+					<li><a href="http://localhost:8083/siddetalle?id=7"
+						data-rel="colorbox" class="cboxElement"> <img width="150"
+							height="150" alt="150x150"
+							src="http://localhost:8083/siddetalle?id=7">
+							<div class="text">
+								<div class="inner">Sample Caption on Hover</div>
+							</div>
+					</a></li>
+
+					<li><a href="http://localhost:8083/siddetalle?id=8"
+						data-rel="colorbox" class="cboxElement"> <img width="150"
+							height="150" alt="150x150"
+							src="http://localhost:8083/siddetalle?id=8">
+							<div class="text">
+								<div class="inner">Sample Caption on Hover</div>
+							</div>
+					</a></li>
+				</ul>
+			</div>
+			<!-- PAGE CONTENT ENDS -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<div class="col-sm-12 widget-container-col ui-sortable"
+	id="widget-container-col-12">
+	<div class="widget-box ui-sortable-handle" id="widget-box-10">
+		<div class="widget-header widget-header-small">
+			<h5 class="widget-title smaller">Detalle</h5>
+
+			<div class="widget-toolbar no-border">
+				<ul class="nav nav-tabs" id="myTab">
+					<li class="active"><a data-toggle="tab" href="#home">Información</a>
+					</li>
+
+					<!--<li>
+																<a data-toggle="tab" href="#profile">Profile</a>
+															</li>-->
+
+					<!-- <li>
+																<a data-toggle="tab" href="#info">Info</a>
+															</li> -->
+				</ul>
+			</div>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main padding-6">
+				<div class="tab-content">
+					<div id="home" class="tab-pane in active">
+						<h1>Caferenas.</h1>
+						<div class="hr hr32 hr-dotted"></div>
+						<h3>Caracteristicas basicas.</h3>
+						<ul class="list-unstyled">
+							<li><i class="ace-icon fa fa-caret-right blue"></i>
+								Tela:Piel de durazno</li>
+
+							<li><i class="ace-icon fa fa-caret-right blue"></i> peso:12
+							</li>
+
+							<li><i class="ace-icon fa fa-caret-right blue"></i>
+								color:variado</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+

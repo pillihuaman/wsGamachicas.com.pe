@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
+import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
@@ -75,6 +76,13 @@ public class ImagenRepository implements Iimagen{
 	public List<Detailimagen> lstIDdetalle(int iddetalleimagen) {
 		// TODO Auto-generated method stub
 		return ImagenBL.lstIDdetalle(iddetalleimagen);
+	}
+
+
+	@Override
+	public int InsertProduct(ViewProductBE ViewProductBE) throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		return ImagenBL.InsertProduct(ViewProductBE);
 	}
 
 
