@@ -25,16 +25,6 @@ public class Stock implements Serializable {
 
 	private String description;
 
-	private BigDecimal idclothing;
-
-	private BigDecimal idclothingline;
-
-	private BigDecimal idcolor;
-
-	private BigDecimal iddescription;
-
-	private BigDecimal idusercreate;
-
 	private BigDecimal price;
 
 	private Object status;
@@ -74,46 +64,6 @@ public class Stock implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public BigDecimal getIdclothing() {
-		return this.idclothing;
-	}
-
-	public void setIdclothing(BigDecimal idclothing) {
-		this.idclothing = idclothing;
-	}
-
-	public BigDecimal getIdclothingline() {
-		return this.idclothingline;
-	}
-
-	public void setIdclothingline(BigDecimal idclothingline) {
-		this.idclothingline = idclothingline;
-	}
-
-	public BigDecimal getIdcolor() {
-		return this.idcolor;
-	}
-
-	public void setIdcolor(BigDecimal idcolor) {
-		this.idcolor = idcolor;
-	}
-
-	public BigDecimal getIddescription() {
-		return this.iddescription;
-	}
-
-	public void setIddescription(BigDecimal iddescription) {
-		this.iddescription = iddescription;
-	}
-
-	public BigDecimal getIdusercreate() {
-		return this.idusercreate;
-	}
-
-	public void setIdusercreate(BigDecimal idusercreate) {
-		this.idusercreate = idusercreate;
 	}
 
 	public BigDecimal getPrice() {

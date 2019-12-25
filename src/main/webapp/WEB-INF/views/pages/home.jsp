@@ -27,10 +27,10 @@
 											
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="single.html">Gabi Full Sleeve Sweatshirt</a></h4>
+										<h4><a href="single.html">${item.name}</a></h4>
 										<div class="info-product-price">
-											<span class="item_price">$45.99</span>
-											<del>$69.71</del>
+											<span class="item_price">${item.preciomayor} /s.</span>
+											<del>${item.preciomenor} /s.</del>
 										</div>
 										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
 															<form action="#" method="post">

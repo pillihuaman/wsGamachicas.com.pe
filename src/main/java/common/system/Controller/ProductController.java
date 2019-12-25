@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,6 +25,8 @@ import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.Base.Price;
+import domain.System.BusinessEntity.Base.Producto;
+import domain.System.BusinessEntity.Base.Stock;
 import model.system.repository.ImagenRepository;
 import model.system.repository.stockClothes;
 @RestController
@@ -41,7 +44,7 @@ public class ProductController {
 		   //mdod.setImagen(img);
     	 return new ModelAndView("registerProduct", "command", new ViewProductBE());
     }
-    
+
  		@RequestMapping(value = "/registerProductpost", method = RequestMethod.POST)
  	 public String registerProductpost(@ModelAttribute("command")ViewProductBE ViewProductBE,@RequestParam("files") MultipartFile[]  files,
                     RedirectAttributes redirectAttributes) throws IOException {

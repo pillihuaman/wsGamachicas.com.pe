@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import common.system.ViewModel.ListImagenByIdProductModelAndView;
 import domain.System.BusinessEntity.Base.Producto;
 import domain.System.BusinessEntity.BusinessLogic.WebServiceBL;
 import model.system.Abstract.IWebService;
@@ -15,5 +16,12 @@ public class WebService implements IWebService {
 		// TODO Auto-generated method stub
 		return WebServiceBL.listaProductos();
 	}
+
+	@Override
+	public List<ListImagenByIdProductModelAndView> ListImagenByIdProduct(Producto pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ListImagenByIdProduct(pro);
+	}
+
 
 }

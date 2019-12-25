@@ -46,9 +46,14 @@
        <put-attribute name="title" value="RegisterProduct" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/products/registerProduct.jsp" />  
        </definition> 
-          <definition name="registerdetalleProduct" extends="base-definition">  
+       <definition name="registerdetalleProduct" extends="base-definition">  
        <put-attribute name="title" value="RegisterdetalleProduct" />  
        <put-attribute name="body" value="/WEB-INF/views/Imagen/registerdetalleProduct.jsp" />  
+       </definition>
+       
+       <definition name="registerStock" extends="base-definition">  
+       <put-attribute name="title" value="RegisterStock" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/products/RegisterStock.jsp" />  
        </definition> 
    
    
