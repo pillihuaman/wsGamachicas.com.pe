@@ -18,14 +18,12 @@
 	<div class="col-sm-6">
 		<div id="myresultdo" class="img-zoom-result myresultdo imgmain center"></div>
 	</div>
-	<div class="col-sm-3">
 
+	<div class="col-sm-3">
+	 <div class="text-success" > <h3>${DetalleProducto.name}</h3></div>
 		<ul class="list-unstyled spaced">
 
-			<li>
-
-				<h1>Cafarenas</h1>
-			</li>
+		
 			<li>
 				<div class="rating inline" style="cursor: pointer;">
 
@@ -39,61 +37,16 @@
 			</li>
 
 			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
-				al mayor : <span class="badge badge-danger">12 s/.</span></li>
+				al mayor : <span class="badge badge-danger">${DetalleProducto.preciomayor}
+					s/.</span></li>
 			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
-				al menor : <span class="badge badge-danger">7 s/.</span></li>
-
+				al menor : <span class="badge badge-danger">${DetalleProducto.preciomenor}
+					s/.</span></li>
 
 		</ul>
-
-
 	</div>
 </div>
 
-<div class="page-content">
-
-
-	<div class="page-header">
-		<h1>Galleria de Modelos</h1>
-	</div>
-	<!-- /.page-header -->
-
-	<div class="row">
-		<div class="col-xs-12">
-			<!-- PAGE CONTENT BEGINS -->
-			<div>
-				<ul class="ace-thumbnails clearfix">
-					<li><img id="imgbox" width="150" height="150" alt="150x150"
-						src="http://localhost:8083/siddetalle?id=7" onclick="zoomout();">
-
-
-					</li>
-
-					<li><a href="http://localhost:8083/siddetalle?id=7"
-						data-rel="colorbox" class="cboxElement"> <img width="150"
-							height="150" alt="150x150"
-							src="http://localhost:8083/siddetalle?id=7">
-							<div class="text">
-								<div class="inner">Sample Caption on Hover</div>
-							</div>
-					</a></li>
-
-					<li><a href="http://localhost:8083/siddetalle?id=8"
-						data-rel="colorbox" class="cboxElement"> <img width="150"
-							height="150" alt="150x150"
-							src="http://localhost:8083/siddetalle?id=8">
-							<div class="text">
-								<div class="inner">Sample Caption on Hover</div>
-							</div>
-					</a></li>
-				</ul>
-			</div>
-			<!-- PAGE CONTENT ENDS -->
-		</div>
-		<!-- /.col -->
-	</div>
-	<!-- /.row -->
-</div>
 <div class="col-sm-12 widget-container-col ui-sortable"
 	id="widget-container-col-12">
 	<div class="widget-box ui-sortable-handle" id="widget-box-10">
@@ -139,11 +92,4 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
 

@@ -25,13 +25,16 @@ public class WebServiceController
 	//parte del repositorio
 	//@Autowired
 	//private IWebService pro;
+
  @GetMapping("/ListaProducto")
  public ModelEntities ListaProducto()
  {
-	 Generic<ModelEntities> t= new Generic<ModelEntities>();
-	 ModelEntities pro =  new ModelEntities();
-	 pro=  (ModelEntities) t.CallWebServiceApi(pro, "ListaProducto","GET");
-	return pro;
+	 Generic<ModelEntities,Producto> t= new Generic<ModelEntities,Producto>();
+
+	 ModelEntities response =  new ModelEntities();
+	 Producto request= new Producto();
+	 response=t.CallWebServiceApi(request, response ,"ListaProducto","GET" );
+	return response;
  }
  @PostMapping("/GuardarProductos")
  public List<Producto> GuardarProductos(@RequestBody Producto pro)
@@ -43,11 +46,9 @@ public class WebServiceController
  @PostMapping("/ListImagenByIdProduct")
  public List<Producto> ListImagenByIdProduct(@RequestBody Producto pro)
  {
-	 Generic<ListImagenByIdProductModelAndView> t= new Generic<ListImagenByIdProductModelAndView>();
+	 Generic<ListImagenByIdProductModelAndView,Producto> t= new Generic< ListImagenByIdProductModelAndView,Producto>();
 	 ListImagenByIdProductModelAndView pro1 =  new ListImagenByIdProductModelAndView();
-	 pro1=   t.CallWebServiceApi(pro1, "ListImagenByIdProduct","POST");
-
-	 
+	 pro1=   t.CallWebServiceApi( new Producto(),pro1 ,"ListImagenByIdProduct","POST");
 	 WebService WebService = new WebService();
 	return WebService.listaProductos();
  }

@@ -12,7 +12,7 @@
     	<div class="col-md-3 product-men">
 								<div class="men-pro-item simpleCart_shelfItem">
 									<div class="men-thumb-item">
-										<img src="<c:url value="${item.url}"/>"  alt="" class="pro-image-front">
+										<img src="<c:url value="${item.url}"/>"  alt="" class="pro-image-front" width="231px" height="307px">
 										<img src="${item.url}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">

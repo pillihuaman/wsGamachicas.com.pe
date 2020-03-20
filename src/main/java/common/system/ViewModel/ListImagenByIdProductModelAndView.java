@@ -15,5 +15,17 @@ public class ListImagenByIdProductModelAndView {
 	}
 
 	private List<HomeViewModel> listImagenByIdProduct ;
+	public List<Imagen> getLstimagen() {
+		return lstimagen;
+	}
+
+	public void setLstimagen(List<Imagen> lstimagen) {
+		this.lstimagen = lstimagen;
+	}
+
+	private List<Imagen> lstimagen ;
+	
 	
 }
+
+

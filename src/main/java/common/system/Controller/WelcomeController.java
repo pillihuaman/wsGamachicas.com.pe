@@ -48,15 +48,11 @@ public class WelcomeController {
 		}
 		String url = UrlParrent + "/sid?id=";
 		ListaProducto();
-		List<Imagen> imf = null;
 		List<HomeViewModel> lsturlimagen = new ArrayList<HomeViewModel>();
-		ImagenDa obj = new ImagenDa();
-		stockClothes stockClothes = new stockClothes();
-
 		// Call to Api
-		 Generic<ListImagenByIdProductModelAndView> t= new Generic<ListImagenByIdProductModelAndView>();
+		 Generic<ListImagenByIdProductModelAndView ,Producto> t= new Generic<ListImagenByIdProductModelAndView,Producto>();
 		 ListImagenByIdProductModelAndView pro1 =  new ListImagenByIdProductModelAndView();
-		 pro1=   t.CallWebServiceApi(pro1, "ListImagenByIdProduct","POST");
+		 pro1=   t.CallWebServiceApi(new Producto(),pro1,"POST","ListImagenByIdProduct");
 		// end call
 
 		//mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());

@@ -64,5 +64,12 @@ public class HomeViewModel {
     private double preciomayor; 
     private double preciomenor;
     private int countViews;
+    public int getIdDetailImagen() {
+		return IdDetailImagen;
+	}
+	public void setIdDetailImagen(int idDetailImagen) {
+		IdDetailImagen = idDetailImagen;
+	}
+	private int IdDetailImagen ;
     
 }
