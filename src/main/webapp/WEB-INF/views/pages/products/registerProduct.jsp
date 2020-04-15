@@ -31,7 +31,7 @@
 				<br>
 				<div class="control-group">
 					<label for="positionweb">Nombre del producto:</label>
-					<form:input path="Imagen.name" placeholder="Nombre del producto"
+					<form:input path="detalleProducto.description" placeholder="Nombre del producto"
 						class="form-control" />
 
 					<label for="positionweb">Posicion WEB:</label>

@@ -20,10 +20,12 @@
 	</div>
 
 	<div class="col-sm-3">
-	 <div class="text-success" > <h3>${DetalleProducto.name}</h3></div>
+		<div class="text-success">
+			<h3>${DetalleProducto.producto.nombre}</h3>
+		</div>
 		<ul class="list-unstyled spaced">
 
-		
+
 			<li>
 				<div class="rating inline" style="cursor: pointer;">
 
@@ -37,10 +39,10 @@
 			</li>
 
 			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
-				al mayor : <span class="badge badge-danger">${DetalleProducto.preciomayor}
+				al mayor : <span class="badge badge-danger">${DetalleProducto.price.preciomayor}
 					s/.</span></li>
 			<li><i class="ace-icon fa fa-check bigger-110 green"></i> Precio
-				al menor : <span class="badge badge-danger">${DetalleProducto.preciomenor}
+				al menor : <span class="badge badge-danger">${DetalleProducto.price.preciomenor}
 					s/.</span></li>
 
 		</ul>
@@ -76,16 +78,18 @@
 						<h1>Caferenas.</h1>
 						<div class="hr hr32 hr-dotted"></div>
 						<h3>Caracteristicas basicas.</h3>
-						<ul class="list-unstyled">
-							<li><i class="ace-icon fa fa-caret-right blue"></i>
-								Tela:Piel de durazno</li>
 
-							<li><i class="ace-icon fa fa-caret-right blue"></i> peso:12
-							</li>
+						<c:forEach items="${ListDetailProduct}" var="item"
+							varStatus="myIndex">
 
-							<li><i class="ace-icon fa fa-caret-right blue"></i>
-								color:variado</li>
-						</ul>
+							<div class="">
+								<ul class="list-unstyled">
+									<li><i class="ace-icon fa fa-caret-right blue"></i>
+										${item.tipo}:${item.description}</li>
+								</ul>
+							</div>
+						</c:forEach>
+
 					</div>
 				</div>
 			</div>

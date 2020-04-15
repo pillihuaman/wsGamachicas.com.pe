@@ -21,13 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.system.AppPropertiesConfig;
-import common.system.ViewModel.ListImagenByIdProductModelAndView;
 import common.system.webservice.Adapter.Generic;
 import domain.System.*;
 import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
+import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.Base.Producto;
@@ -153,9 +153,8 @@ public class ImagenEntityController {
 				redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
 				return "redirect:uploadStatus";
 			}
-			
+
 			try {
-			
 
 				if (i >= 0) {
 					// if( file.isEmpty())
@@ -222,47 +221,45 @@ public class ImagenEntityController {
 		}
 		String url = UrlParrent + "/siddetalle?id=";
 		List<String> lsturlimagen = new ArrayList<String>();
-		HomeViewModel response= new HomeViewModel();
+		HomeViewModel response = new HomeViewModel();
 		ModelAndView moddd = new ModelAndView();
-		
-		// Call to  imagen entity
+
+		// Call to imagen entity
 		Generic<Imagen, Imagen> Imagenservice = new Generic<Imagen, Imagen>();
 		Imagen responseimg = new Imagen();
 		Imagen requestimg = new Imagen();
 		requestimg.setIdimagen(IdImagen);
-		responseimg=Imagenservice.CallWebServiceApi(requestimg,responseimg, "POST","ImagenSel" );
+		responseimg = Imagenservice.CallWebServiceApi(requestimg, responseimg, "POST", "ImagenSel");
 		// end call
-		 
-		
-		// Call to Api
-		Generic<ListImagenByIdProductModelAndView, Imagen> t = new Generic<ListImagenByIdProductModelAndView, Imagen>();
-		ListImagenByIdProductModelAndView pro1 = new ListImagenByIdProductModelAndView();
+
+//		// Call to Api
+		Generic<Imagen, HomeViewModel[]> test = new Generic<Imagen, HomeViewModel[]>();
+		HomeViewModel[] HomeViewModel = null;
 		Imagen prod = new Imagen();
 		prod.setIdimagen(responseimg.getIdimagen());
-		pro1 = t.CallWebServiceApi(prod,pro1,"POST","ListDetImagenByIdImagen");
+		HomeViewModel = test.CallWebServiceApi(prod, HomeViewModel, "POST", "ListDetImagenByIdImagen");
 		// end call
-		List<HomeViewModel>  lines =pro1.getListImagenByIdProduct();
+
+		HomeViewModel model = new HomeViewModel();
+		for (HomeViewModel p : HomeViewModel) {
+			lsturlimagen.add(url + p.getDetailimagen().getIdDetailImagen());
+		}
+		// Call to Api
+		Generic<Producto, Detailproduct[]> objDetailProduct = new Generic<Producto, Detailproduct[]>();
+		Detailproduct[] Detailproduct = null;
+		Producto produc = new Producto();
+		produc.setIdProducto(HomeViewModel[0].getProducto().getIdProducto());
+		Detailproduct = objDetailProduct.CallWebServiceApi(produc, Detailproduct, "POST", "ListDetailProductByIdProduct");
+		// end call
+		
 	
 		
-	           // collect the output and convert streams to a List
-	      
-
-
-		  lines.forEach(System.out::println); 
-	        
-	        HomeViewModel model= new HomeViewModel();
-	        
-	  
-	        //lines.forEach(imagen -> lsturlimagen.add(url + imagen.getIdDetailImagen()));
-	        	
-	        for (HomeViewModel p:lines) {
-	        	lsturlimagen.add(url + p.getIdDetailImagen());
-	        	}
+		
 		mod.addAttribute("listaimagenes", lsturlimagen);
-		
-		mod.addAttribute("DetalleProducto", lines.get(0));
-	
-		return new ModelAndView("DetallaImagen", "command",model);
+		mod.addAttribute("DetalleProducto", HomeViewModel[0]);
+		mod.addAttribute("ListDetailProduct", Detailproduct);
+//	
+		return new ModelAndView("DetallaImagen", "command", model);
 	}
 
 	@RequestMapping(value = "/registerdetalleProduct", method = RequestMethod.GET)

@@ -1,75 +1,41 @@
 package domain.System.BusinessEntity.Base;
 
-public class HomeViewModel {
-	public int getIdimagen() {
-		return idimagen;
+import java.io.Serializable;
+
+public class HomeViewModel implements Serializable  {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Imagen getImagen() {
+		return Imagen;
 	}
-	public String getDESCRIPTION() {
-		return DESCRIPTION;
+	public Producto getProducto() {
+		return Producto;
 	}
-	public String getName() {
-		return name;
+	public Price getPrice() {
+		return Price;
 	}
-	public int getIdProducto() {
-		return IdProducto;
+	public Detailimagen getDetailimagen() {
+		return Detailimagen;
 	}
-	public String getNombreProducto() {
-		return NombreProducto;
+	public void setImagen(Imagen imagen) {
+		Imagen = imagen;
 	}
-	public double getPreciomayor() {
-		return preciomayor;
+	public void setProducto(Producto producto) {
+		Producto = producto;
 	}
-	public double getPreciomenor() {
-		return preciomenor;
+	public void setPrice(Price price) {
+		Price = price;
 	}
-	public int getCountViews() {
-		return countViews;
+	public void setDetailimagen(Detailimagen detailimagen) {
+		Detailimagen = detailimagen;
 	}
-	public void setIdimagen(int idimagen) {
-		this.idimagen = idimagen;
-	}
-	public void setDESCRIPTION(String dESCRIPTION) {
-		DESCRIPTION = dESCRIPTION;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setIdProducto(int idProducto) {
-		IdProducto = idProducto;
-	}
-	public void setNombreProducto(String nombre) {
-		NombreProducto = nombre;
-	}
-	public void setPreciomayor(double preciomayor) {
-		this.preciomayor = preciomayor;
-	}
-	public void setPreciomenor(double preciomenor) {
-		this.preciomenor = preciomenor;
-	}
-	public void setCountViews(int countViews) {
-		this.countViews = countViews;
-	}
-	private String url;
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	private int idimagen ;
-    private String DESCRIPTION ;
-    private String name;
-    private int IdProducto;
-    private String NombreProducto;
-    private double preciomayor; 
-    private double preciomenor;
-    private int countViews;
-    public int getIdDetailImagen() {
-		return IdDetailImagen;
-	}
-	public void setIdDetailImagen(int idDetailImagen) {
-		IdDetailImagen = idDetailImagen;
-	}
-	private int IdDetailImagen ;
+	 private  Imagen Imagen;
+	 private  Producto Producto;
+	 private Price Price;
+	 private  Detailimagen Detailimagen;
+	
+
     
 }

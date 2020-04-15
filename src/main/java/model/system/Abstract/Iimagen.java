@@ -10,6 +10,7 @@ import domain.System.BusinessEntity.CrudImagenBE;
 import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Detailimagen;
+import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.Imagen;
 import repository.System.DataAccess.MySql.ImagenDa;
 
@@ -24,5 +25,6 @@ public interface Iimagen {
 	int   InsertImagen( CrudImagenBE CrudImagenBE) throws SQLException, IOException;
 	int   InsertDetalleImagen( ViewStockBE ViewStockBE) throws SQLException, IOException; 
 	int   InsertProduct( ViewProductBE ViewProductBE) throws SQLException, IOException; 
+//	 boolean ProductoDetalleIns(Detailproduct Detailproduct);
 
 }

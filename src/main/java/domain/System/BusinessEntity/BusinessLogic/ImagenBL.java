@@ -12,6 +12,7 @@ import domain.System.BusinessEntity.CrudImagenBE;
 import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Detailimagen;
+import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.Imagen;
 import repository.System.DataAccess.MySql.ImagenDa;
 
@@ -58,5 +59,9 @@ public class ImagenBL {
 	    { 
 	        return ImagenDa.InsertProduct(ViewProductBE);
 	    }
+//
+//	public static int ProductoDetalleIns(Detailproduct Detailproduct) throws SQLException, IOException {
+//		return ImagenDa.ProductoDetalleIns(ViewProductBE);
+//	}
 	  
 }
