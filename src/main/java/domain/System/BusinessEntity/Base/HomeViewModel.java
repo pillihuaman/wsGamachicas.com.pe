@@ -10,9 +10,7 @@ public class HomeViewModel implements Serializable  {
 	public Imagen getImagen() {
 		return Imagen;
 	}
-	public Producto getProducto() {
-		return Producto;
-	}
+
 	public Price getPrice() {
 		return Price;
 	}
@@ -22,9 +20,7 @@ public class HomeViewModel implements Serializable  {
 	public void setImagen(Imagen imagen) {
 		Imagen = imagen;
 	}
-	public void setProducto(Producto producto) {
-		Producto = producto;
-	}
+
 	public void setPrice(Price price) {
 		Price = price;
 	}
@@ -32,7 +28,14 @@ public class HomeViewModel implements Serializable  {
 		Detailimagen = detailimagen;
 	}
 	 private  Imagen Imagen;
-	 private  Producto Producto;
+	 public Product getProduct() {
+		return Product;
+	}
+
+	public void setProduct(Product product) {
+		Product = product;
+	}
+	private  Product Product;
 	 private Price Price;
 	 private  Detailimagen Detailimagen;
 	

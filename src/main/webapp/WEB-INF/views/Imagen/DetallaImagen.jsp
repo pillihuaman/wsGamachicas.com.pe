@@ -16,7 +16,8 @@
 		</c:forEach>
 	</div>
 	<div class="col-sm-6">
-		<div id="myresultdo" class="img-zoom-result myresultdo imgmain center"></div>
+		<div id="myresultdo" class="img-zoom-result myresultdo imgmain center">
+		</div>
 	</div>
 
 	<div class="col-sm-3">

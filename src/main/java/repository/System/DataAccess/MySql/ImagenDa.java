@@ -43,16 +43,16 @@ public class ImagenDa {
 			try (org.sql2o.Connection con = sql2o.open()) {
 				idImagen1 = (BigInteger) con.createQuery(sql, true)
 						.addParameter("name", CrudImagenBE.getImagen().getName())
-						.addParameter("idclothing", CrudImagenBE.getImagen().getIdclothing())
-						.addParameter("idposition", CrudImagenBE.getImagen().getIdposition())
-						.addParameter("positionweb", CrudImagenBE.getImagen().getPositionweb())
+//						.addParameter("idclothing", CrudImagenBE.getImagen().getIdclothing())
+//						.addParameter("idposition", CrudImagenBE.getImagen().getIdposition())
+//						.addParameter("positionweb", CrudImagenBE.getImagen().getPositionweb())
 						.addParameter("countViews", CrudImagenBE.getImagen().getCountViews())
 						.addParameter("imagendata", CrudImagenBE.getImagen().getImagendata())
 						.addParameter("url", "fsdfs")
 						.addParameter("DESCRIPTION", CrudImagenBE.getImagen().getDescription())
 						.addParameter("STATUS", true).addParameter("createdate", LocalDateTime.now())
 						.addParameter("updatedate", LocalDateTime.now())
-						.addParameter("idclothingline", CrudImagenBE.getImagen().getIdclothingline()).executeUpdate()
+						.addParameter("idclothingline", 1).executeUpdate()
 						.getKey();
 
 			}
@@ -232,14 +232,14 @@ public class ImagenDa {
 			dbConnection = MySqlAdapter.connectDatabase();
 			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
 			callableStatement.setString(1, CrudImagenBE.getImagen().getName());
-			callableStatement.setInt(2, CrudImagenBE.getImagen().getIdclothing());
-			callableStatement.setInt(3, CrudImagenBE.getImagen().getIdposition());
-			callableStatement.setInt(4, CrudImagenBE.getImagen().getPositionweb());
-			callableStatement.setInt(5, CrudImagenBE.getImagen().getCountViews());
-			callableStatement.setBytes(6, CrudImagenBE.getImagen().getImagendata());
-			callableStatement.setString(7, CrudImagenBE.getImagen().getUrl());
-			callableStatement.setString(8, CrudImagenBE.getImagen().getDescription());
-			callableStatement.setInt(9, CrudImagenBE.getImagen().getIdclothingline());
+//			callableStatement.setInt(2, CrudImagenBE.getImagen().getIdclothing());
+//			callableStatement.setInt(3, CrudImagenBE.getImagen().getIdposition());
+//			callableStatement.setInt(4, CrudImagenBE.getImagen().getPositionweb());
+//			callableStatement.setInt(5, CrudImagenBE.getImagen().getCountViews());
+//			callableStatement.setBytes(6, CrudImagenBE.getImagen().getImagendata());
+//			callableStatement.setString(7, CrudImagenBE.getImagen().getUrl());
+//			callableStatement.setString(8, CrudImagenBE.getImagen().getDescription());
+//			callableStatement.setInt(9, CrudImagenBE.getImagen().getIdclothingline());
 			callableStatement.registerOutParameter(10, java.sql.Types.INTEGER);
 			// callableStatement.executeUpdate();
 			boolean hasresult = callableStatement.execute();
@@ -330,13 +330,13 @@ public class ImagenDa {
 			dbConnection = MySqlAdapter.connectDatabase();
 			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
 			callableStatement.setString(1, ViewProductBE.getImagen().getName());
-			callableStatement.setInt(2, ViewProductBE.getImagen().getPositionweb());
+//			callableStatement.setInt(2, ViewProductBE.getImagen().getPositionweb());
 			callableStatement.setInt(3, ViewProductBE.getImagen().getCountViews());
 			callableStatement.setBytes(4, ViewProductBE.getImagen().getImagendata());
 			callableStatement.setString(5, ViewProductBE.getImagen().getDescription());
 			callableStatement.setInt(6, ViewProductBE.getClothingline().getIdclothingline());
-			callableStatement.setDouble(7, ViewProductBE.getPrice().getPreciomayor());
-			callableStatement.setDouble(8, ViewProductBE.getPrice().getPreciomenor());
+//			callableStatement.setDouble(7, ViewProductBE.getPrice().getPreciomayor());
+//			callableStatement.setDouble(8, ViewProductBE.getPrice().getPreciomenor());
 			callableStatement.registerOutParameter(9, java.sql.Types.INTEGER);
 			// callableStatement.executeUpdate();
 			boolean hasresult = callableStatement.execute();

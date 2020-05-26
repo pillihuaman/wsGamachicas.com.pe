@@ -1,141 +1,131 @@
 package common.system.webservice.Adapter;
-import java.io.Console;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.databind.ObjectWriter;
 import common.system.AppPropertiesConfig;
-import common.system.Help.GenericList;
-import common.system.ViewModel.ModelEntities;
-import domain.System.BusinessEntity.Base.Detailproduct;
+import common.system.RequestResponse.JwtRequest;
+import common.system.model.response.HomeViewModelResponse;
+import common.system.model.response.UsersResponse;
 import domain.System.BusinessEntity.Base.HomeViewModel;
-import domain.System.BusinessEntity.Base.Imagen;
-import domain.System.BusinessEntity.Base.Producto;
+import domain.System.BusinessEntity.Base.Users;
 
-public class Generic<S,T> {
-	
+public class Generic<RQ, RS> {
 
-	private T t;
+	HelpService helpService= new HelpService();
 
-
-
-
-	public S getS() {
-		return s;
+	public RQ getRq() {
+		return rq;
 	}
 
-	public void setS(S s) {
-		this.s = s;
+	public void setRq(RQ rq) {
+		this.rq = rq;
 	}
 
-	private S s;
-	public T getT() {
-		return t;
+	public RS getRs() {
+		return rs;
 	}
 
-	public void setT(T t) {
-		this.t = t;
-	}
-	 
-	public String getTClass(T t) {
-		if (t instanceof Producto )
-		{
-		   return Producto.class.getName();
-		}
-
-		return  "";
+	public void setRs(RS rs) {
+		this.rs = rs;
 	}
 
-public T CallWebServiceApi(S request ,T reponsew ,String MethodType,String urlApiCatalogRute    )
-{
-	 String uri = "http://localhost:8080/WebService/"+urlApiCatalogRute;
-	 RestTemplate restTemplate = new RestTemplate();
-		 //String uri="http://localhost:8080/WebService/ListaProducto";
-	 if (request instanceof  Producto  && MethodType == "GET")
-		{
-		 ModelEntities ModelEntities= new ModelEntities();
-		 ResponseEntity<ModelEntities> response =restTemplate.getForEntity(
-				 uri,
-				 ModelEntities.class);
-		 ModelEntities = response.getBody();
-          return (T)ModelEntities; 
-		 
-		}
-	 if (request instanceof  Producto && reponsew instanceof  Producto  &&  MethodType == "POST"  )
-		{
-	
-		    
-		 Producto response = new Producto();
-		    ResponseEntity<Producto> result = restTemplate.postForEntity(uri, request, Producto.class);
-		    response=result.getBody();
-		   return (T) response;
-		}
-	 if (request instanceof  Producto && MethodType == "POST"   )
-		{
-	
-		    
-		 Detailproduct[] response ;
-		 
-		    ResponseEntity<Detailproduct[]> result = restTemplate.postForEntity(uri, request, Detailproduct[].class);
-		    response=result.getBody();
-		   return (T) response;
-		}
-	 if (request instanceof  Imagen && reponsew instanceof  Imagen  &&  MethodType == "POST"  )
-		{
-	
-		    
-		    Imagen response = new Imagen();
-		    ResponseEntity<Imagen> result = restTemplate.postForEntity(uri, request, Imagen.class);
-		    response=result.getBody();
-		   return (T) response;
-		}
+	private RQ rq;
+	private RS rs;
+	RestTemplate restTemplate = new RestTemplate();
 
-	 if (request instanceof  Imagen &&  reponsew instanceof  HomeViewModel   &&  MethodType == "POST"    )
-		{
-	
-		    
-		 HomeViewModel response = new HomeViewModel();
-		    ResponseEntity<HomeViewModel> result = restTemplate.postForEntity(uri, request, HomeViewModel.class);
-		    response=result.getBody();
-		   return (T) response;
+	public String TokenKey() {
+		JwtRequest jsonRequest = new JwtRequest();
+		jsonRequest.setPassword(helpService.getPassword());
+		jsonRequest.setUsername(helpService.getUserName());
+		ResponseEntity<?> requestJson;
+		requestJson = restTemplate.postForEntity(helpService.getDomainAPICore() + "/authenticate",
+				jsonRequest, String.class);
+		return (String) requestJson.getBody();
+	}
+
+	@SuppressWarnings("unchecked")
+	public void CallWebServiceApi(RQ request, RS reponsew, String MethodType, String url)
+			throws JsonProcessingException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("Authorization", "Bearer " + TokenKey());
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = ow.writeValueAsString(request);
+		HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+		if (request instanceof Users && reponsew instanceof UsersResponse && MethodType == "POST") {
+			UsersResponse result = restTemplate.postForObject(url, entity, UsersResponse.class);
+			;
+			setRs((RS) result);
 		}
-	 
-	 if (request instanceof  Imagen   && MethodType == "POST")
-		{
-
-		 ResponseEntity<HomeViewModel[]> response =restTemplate.postForEntity(
-				 uri,request,
-				 HomeViewModel[].class);
-		 //ModelEntities = ;
-		  
-       return   (T) response.getBody(); 
-		 
-		} 
-	 boolean s= Detailproduct.class.isInstance(request.getClass());
-	 if (request instanceof  Producto    &&   MethodType == "POST")
-		{
-		 //GenericList<reponsew>  instanceof 
-		 ResponseEntity<HomeViewModel[]> response =restTemplate.postForEntity(
-				 uri,request,
-				 HomeViewModel[].class);
-		 //ModelEntities = ;
-		  
-       return   (T) response.getBody(); 
-		 
+		else if (request instanceof HomeViewModel && reponsew instanceof HomeViewModelResponse && MethodType == "POST") {
+			HomeViewModelResponse result = restTemplate.postForObject(url, entity, HomeViewModelResponse.class);
+			;
+			setRs((RS) result);
 		}
-	
-	 
-	 return null;
-}
-
-
+		else if (request instanceof Integer && reponsew instanceof HomeViewModelResponse && MethodType == "POST") {
+			HomeViewModelResponse result = restTemplate.postForObject(url, entity, HomeViewModelResponse.class);
+			;
+			setRs((RS) result);
+		}
+//		if (request instanceof Producto && reponsew instanceof Producto && MethodType == "POST") {
+//
+//			Producto response = new Producto();
+//			ResponseEntity<Producto> result = restTemplate.postForEntity(uri, request, Producto.class);
+//			response = result.getBody();
+//			return (T) response;
+//		}
+//		if (request instanceof Producto && MethodType == "POST") {
+//
+//			Detailproduct[] response;
+//
+//			ResponseEntity<Detailproduct[]> result = restTemplate.postForEntity(uri, request, Detailproduct[].class);
+//			response = result.getBody();
+//			return (T) response;
+//		}
+//		if (request instanceof Imagen && reponsew instanceof Imagen && MethodType == "POST") {
+//
+//			Imagen response = new Imagen();
+//			ResponseEntity<Imagen> result = restTemplate.postForEntity(uri, request, Imagen.class);
+//			response = result.getBody();
+//			return (T) response;
+//		}
+//
+//		if (request instanceof Imagen && reponsew instanceof HomeViewModel && MethodType == "POST") {
+//
+//			HomeViewModel response = new HomeViewModel();
+//			ResponseEntity<HomeViewModel> result = restTemplate.postForEntity(uri, request, HomeViewModel.class);
+//			response = result.getBody();
+//			return (T) response;
+//		}
+//
+//		if (request instanceof Imagen && MethodType == "POST") {
+//
+//			ResponseEntity<HomeViewModel[]> response = restTemplate.postForEntity(uri, request, HomeViewModel[].class);
+//			// ModelEntities = ;
+//
+//			return (T) response.getBody();
+//
+//		}
+//		boolean s = Detailproduct.class.isInstance(request.getClass());
+//		if (request instanceof Producto && MethodType == "POST") {
+//			// GenericList<reponsew> instanceof
+//			ResponseEntity<HomeViewModel[]> response = restTemplate.postForEntity(uri, request, HomeViewModel[].class);
+//			// ModelEntities = ;
+//
+//			return (T) response.getBody();
+//
+//		}
+//
+//		return null;
+	}
 
 }
-

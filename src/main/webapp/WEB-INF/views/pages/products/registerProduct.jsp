@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +10,12 @@
 
 <body>
 	<div class="container">
-		<form:form method="POST" action="/registerProductpost"
+		<form:form method="POST" action="/RegisterProductpost"
 			enctype="multipart/form-data" class="form-inline">
 			<fieldset>
 
 				<!-- Username -->
-				<label class="control-label" for="username">Linea de Ropa:</label>
+					<!-- <label class="control-label" for="username">Linea de Ropa:</label>
 				<div class="controls">
 					<select name="Clothingline.idclothingline" class="form-control">
 						<option value="-1">Selecionar..</option>
@@ -26,16 +24,16 @@
 									value="${ item.name}" /></option>
 						</c:forEach>
 					</select>
-				</div>
+				</div>-->
 
 				<br>
 				<div class="control-group">
 					<label for="positionweb">Nombre del producto:</label>
-					<form:input path="detalleProducto.description" placeholder="Nombre del producto"
+					<form:input path="Product.name" placeholder="Nombre del producto"
 						class="form-control" />
 
 					<label for="positionweb">Posicion WEB:</label>
-					<form:input path="Imagen.positionweb" placeholder="Posicion WEB"
+					<form:input path="Imagen.positionWeb" placeholder="Posicion WEB"
 						class="form-control" />
 
 					<label for="CantidadViews">Cantidad Vistas:</label>
@@ -45,18 +43,18 @@
 				<br>
 				<div class="form-group">
 					<label for="email">Precio al mayor:</label>
-					<form:input path="Price.preciomayor" placeholder="Precio la mayor"
+					<form:input path="Price.higherPrice" placeholder="Precio la mayor"
 						class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="email">Precio al menor:</label>
-					<form:input path="Price.preciomenor" placeholder="Precio la menor"
+					<form:input path="Price.smallerPrice" placeholder="Precio la menor"
 						class="form-control" />
 				</div>
 				<div class="control-group">
 					<label class="control-label">Descripción</label>
 					<div class="controls">
-						<form:textarea path="Imagen.description"
+						<form:textarea path="Product.description"
 							placeholder="Dreve descripcion de la imagen caracteristicas "
 							class="form-control" />
 					</div>

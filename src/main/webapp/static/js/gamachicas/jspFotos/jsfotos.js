@@ -1,13 +1,9 @@
 // A $( document ).ready() block.
 $( document ).ready(function() {
-    console.log( "ready!" );
+  MostrarImagen("img0");
     
 });
 
-
-
-	
-	
 const el = document.querySelector("#myresultdo");
 
 el.addEventListener("mousemove", (e) => {
@@ -16,7 +12,7 @@ el.addEventListener("mousemove", (e) => {
 });
 
  function MostrarImagen(id) {
-	 debugger;
+
 	var jqueyElement='#';
 	 var r= $(jqueyElement.concat(id));
 	 var ulrimg=$(r).attr('src');

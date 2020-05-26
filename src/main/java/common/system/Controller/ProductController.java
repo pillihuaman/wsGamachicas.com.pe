@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,7 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.system.AppPropertiesConfig;
-import common.system.ViewModel.ModelEntities;
+import common.system.MenuAPP;
+import common.system.model.response.HomeViewModelResponse;
+import common.system.model.response.UsersResponse;
 import common.system.webservice.Adapter.Generic;
 import domain.System.BusinessEntity.CrudImagenBE;
 import domain.System.BusinessEntity.ViewProductBE;
@@ -36,14 +39,19 @@ import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.Base.ListDetailproduct;
 import domain.System.BusinessEntity.Base.Price;
+import domain.System.BusinessEntity.Base.Product;
 import domain.System.BusinessEntity.Base.Producto;
 import domain.System.BusinessEntity.Base.Stock;
+import domain.System.BusinessEntity.Base.Users;
 import model.system.repository.ImagenRepository;
 import model.system.repository.stockClothes;
-
+import common.system.webservice.Adapter.HelpService;
 @RestController
 public class ProductController {
+	@Autowired
+	HelpService helpService;
   RestTemplate restTemplate = new RestTemplate();
+ private  MenuAPP MenuAPP= new MenuAPP();
 	public String Url()
 	{
 		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
@@ -55,20 +63,14 @@ public class ProductController {
 		}
 		return null;
 	}
-	@RequestMapping(value = "/registerProduct", method = RequestMethod.GET)
+	@RequestMapping(value = "/RegisterProduct", method = RequestMethod.GET)
 	public ModelAndView registerProduct(ModelMap mod) {
 		stockClothes stockClothes = new stockClothes();
-		mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
-		// mod.addAttribute("Mensaje", "Registra informacion basica");
-		// ViewStockBE mdod = new ViewStockBE();
-		// Clothingline ob = new Clothingline();
-		// Imagen img = new Imagen();
-		// mdod.setClothingline(ob);
-		// mdod.setImagen(img);
+		//mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
 		return new ModelAndView("registerProduct", "command", new ViewProductBE());
 	}
 
-	@RequestMapping(value = "/registerProductpost", method = RequestMethod.POST)
+	@RequestMapping(value = "/RegisterProductpost", method = RequestMethod.POST)
 	public String registerProductpost(@ModelAttribute("command") ViewProductBE ViewProductBE,
 			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) throws IOException {
 		int idiamgen = 0;
@@ -92,42 +94,26 @@ public class ProductController {
 			try {
 
 				if (i == 0) {
-					// Get the file and save it somewhere
-					// byte[] bytes = file.getBytes();
-					// Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-					// Files.write(path, bytes);
-
-					// zph
-					ViewProductBE objs = new ViewProductBE();
 					ImagenRepository insert = new ImagenRepository();
-					stockClothes stockClothes = new stockClothes();
 					Imagen img = new Imagen();
+					Product pro = new Product();
 					Price pr = new Price();
-					Clothingline cl = new Clothingline();
 					img.setImagendata(bytes);
-
+					pro.setName((ViewProductBE.getProduct().getName()));
+					pro.setDescription(ViewProductBE.getProduct().getDescription());
 					img.setCountViews(ViewProductBE.getImagen().getCountViews());
-					img.setDescription(ViewProductBE.getImagen().getDescription());
-					img.setIdposition(ViewProductBE.getImagen().getIdposition());
-					img.setPositionweb(ViewProductBE.getImagen().getPositionweb());
-					img.setName(ViewProductBE.getImagen().getName());
-					pr.setPreciomayor(ViewProductBE.getPrice().getPreciomayor());
-					pr.setPreciomenor(ViewProductBE.getPrice().getPreciomenor());
-					cl.setIdclothingline(ViewProductBE.getClothingline().getIdclothingline());
-
-					ViewProductBE crud = new ViewProductBE();
-					crud.setImagen(img);
-					crud.setPrice(pr);
-					crud.setClothingline(cl);
-					// crud.setTest(ViewStockBE.getTest());
-					// int test=insert.tesinsert(crud);
-					// idiamgen=insert.registerImagen(crud);
-					try {
-						idiamgen = insert.InsertProduct(crud);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.getMessage();
-					}
+					img.setPositionWeb(ViewProductBE.getImagen().getPositionWeb());
+					pr.setHigherPrice(ViewProductBE.getPrice().getHigherPrice());
+					pr.setSmallerPrice(ViewProductBE.getPrice().getSmallerPrice());
+					HomeViewModel home = new HomeViewModel();
+					home.setImagen(img);
+					home.setPrice(pr);
+					home.setProduct(pro);
+					Generic<HomeViewModel,HomeViewModelResponse> generic= new Generic<HomeViewModel,HomeViewModelResponse>();
+					HomeViewModelResponse response = new HomeViewModelResponse();
+					generic.CallWebServiceApi(home, response, "POST",  helpService.getDomainAPICore()+"/WebServiceProduct/HomeProductIns");
+					response=generic.getRs();
+					//idiamgen = insert.InsertProduct(crud);
 				}
 				if (idiamgen != 0) {
 					if (i > 0) {
@@ -180,8 +166,9 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		//WebService
-		
+	
 		mod.addAttribute("listaimagenes", UrlParrent);
+		mod.addAttribute("resultMenu",MenuAPP.ListaMenuSistema());
 				//+"/WebService"+"/DetailProductIns");
 		ResponseEntity<Producto[]> result = restTemplate.postForEntity(Url()+"ListProduct", new Producto(), Producto[].class);
 		mod.addAttribute("ListProduct",  result.getBody());

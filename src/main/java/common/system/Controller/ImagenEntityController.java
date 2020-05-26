@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.system.AppPropertiesConfig;
+import common.system.MenuAPP;
 import common.system.webservice.Adapter.Generic;
 import domain.System.*;
 import domain.System.BusinessEntity.ViewProductBE;
@@ -38,6 +39,7 @@ import repository.System.DataAccess.MySql.ImagenDa;
 
 @RestController
 public class ImagenEntityController {
+	 private  MenuAPP MenuAPP= new MenuAPP();
 	// Save the uploaded file to this folder
 	private static String UPLOADED_FOLDER = "C://Users//zarmir//Documents//";
 
@@ -76,7 +78,7 @@ public class ImagenEntityController {
 	@RequestMapping(value = "/addImagen", method = RequestMethod.POST)
 	public String singleFileUpload(@ModelAttribute("command") ViewStockBE ViewStockBE,
 			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) throws IOException {
-		int idiamgen = ViewStockBE.getImagen().getIdimagen();
+		int idiamgen = 1;
 		int idiamgendetail = 0;
 		for (int i = 0; i < files.length; i++) {
 			MultipartFile file = files[0];
@@ -97,8 +99,8 @@ public class ImagenEntityController {
 			try {
 
 				if (i >= 0) {
-					// if( file.isEmpty())
-					// {
+					 if( !  files[i].isEmpty())
+					 {
 					ViewStockBE detalleimagen = new ViewStockBE();
 					Detailimagen det = new Detailimagen();
 					ImagenRepository insertdet = new ImagenRepository();
@@ -116,7 +118,7 @@ public class ImagenEntityController {
 						e.printStackTrace();
 					}
 					// Insertamos detalle de la imagen
-					// }
+					 }
 				}
 
 				// zph
@@ -136,7 +138,7 @@ public class ImagenEntityController {
 	@RequestMapping(value = "/addImagenDetail", method = RequestMethod.POST)
 	public String addImagenDetail(@ModelAttribute("command") ViewStockBE ViewStockBE,
 			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) throws IOException {
-		int idiamgen = ViewStockBE.getImagen().getIdimagen();
+		int idiamgen = 1;
 		int idiamgendetail = 0;
 		for (int i = 0; i < files.length; i++) {
 			MultipartFile file = files[0];
@@ -209,58 +211,55 @@ public class ImagenEntityController {
 		return new ModelAndView("RegisterImagen", "command", new ViewStockBE());
 	}
 
-	@RequestMapping(value = "/DetallaImagen", method = RequestMethod.GET)
-	public ModelAndView DetallaImagen(@RequestParam("id") int IdImagen, ModelMap mod) {
-		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
-		String UrlParrent = "";
-		try {
-			UrlParrent = AppPropertiesConfig.getPropValues("urlImagenAPI");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String url = UrlParrent + "/siddetalle?id=";
-		List<String> lsturlimagen = new ArrayList<String>();
-		HomeViewModel response = new HomeViewModel();
-		ModelAndView moddd = new ModelAndView();
-
-		// Call to imagen entity
-		Generic<Imagen, Imagen> Imagenservice = new Generic<Imagen, Imagen>();
-		Imagen responseimg = new Imagen();
-		Imagen requestimg = new Imagen();
-		requestimg.setIdimagen(IdImagen);
-		responseimg = Imagenservice.CallWebServiceApi(requestimg, responseimg, "POST", "ImagenSel");
-		// end call
-
-//		// Call to Api
-		Generic<Imagen, HomeViewModel[]> test = new Generic<Imagen, HomeViewModel[]>();
-		HomeViewModel[] HomeViewModel = null;
-		Imagen prod = new Imagen();
-		prod.setIdimagen(responseimg.getIdimagen());
-		HomeViewModel = test.CallWebServiceApi(prod, HomeViewModel, "POST", "ListDetImagenByIdImagen");
-		// end call
-
-		HomeViewModel model = new HomeViewModel();
-		for (HomeViewModel p : HomeViewModel) {
-			lsturlimagen.add(url + p.getDetailimagen().getIdDetailImagen());
-		}
-		// Call to Api
-		Generic<Producto, Detailproduct[]> objDetailProduct = new Generic<Producto, Detailproduct[]>();
-		Detailproduct[] Detailproduct = null;
-		Producto produc = new Producto();
-		produc.setIdProducto(HomeViewModel[0].getProducto().getIdProducto());
-		Detailproduct = objDetailProduct.CallWebServiceApi(produc, Detailproduct, "POST", "ListDetailProductByIdProduct");
-		// end call
-		
-	
-		
-		
-		mod.addAttribute("listaimagenes", lsturlimagen);
-		mod.addAttribute("DetalleProducto", HomeViewModel[0]);
-		mod.addAttribute("ListDetailProduct", Detailproduct);
+//	@RequestMapping(value = "/DetallaImagen", method = RequestMethod.GET)
+//	public ModelAndView DetallaImagen(@RequestParam("id") int IdImagen, ModelMap mod) {
+//		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
+//		String UrlParrent = "";
+//		try {
+//			UrlParrent = AppPropertiesConfig.getPropValues("urlImagenAPI");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		String url = UrlParrent + "/siddetalle?id=";
+//		List<String> lsturlimagen = new ArrayList<String>();
+//		// Call to imagen entity
+//		Generic<Imagen, Imagen> Imagenservice = new Generic<Imagen, Imagen>();
+//		Imagen responseimg = new Imagen();
+//		Imagen requestimg = new Imagen();
+//		requestimg.setIdimagen(IdImagen);
+//		responseimg = Imagenservice.CallWebServiceApi(requestimg, responseimg, "POST", "ImagenSel");
+//		// end call
 //	
-		return new ModelAndView("DetallaImagen", "command", model);
-	}
+//
+////		// Call to Api
+//		Generic<Imagen, HomeViewModel[]> test = new Generic<Imagen, HomeViewModel[]>();
+//		HomeViewModel[] HomeViewModel = null;
+//		Imagen prod = new Imagen();
+//		prod.setIdimagen(responseimg.getIdimagen());
+//		HomeViewModel = test.CallWebServiceApi(prod, HomeViewModel, "POST", "ListDetImagenByIdImagen");
+//		// end call
+//
+//		HomeViewModel model = new HomeViewModel();
+//		for (HomeViewModel p : HomeViewModel) {
+//			lsturlimagen.add(url + p.getDetailimagen().getIdDetailImagen());
+//		}
+//		// Call to Api
+//		Generic<Producto, Detailproduct[]> objDetailProduct = new Generic<Producto, Detailproduct[]>();
+//		Detailproduct[] Detailproduct = null;
+//		Producto produc = new Producto();
+//		produc.setIdProducto(HomeViewModel[0].getProducto().getIdProducto());
+//		Detailproduct = objDetailProduct.CallWebServiceApi(produc, Detailproduct, "POST", "ListDetailProductByIdProduct");
+//		// end call
+//		
+//	
+//		mod.addAttribute("listaimagenes", lsturlimagen);
+//		mod.addAttribute("DetalleProducto", HomeViewModel[0]);
+//		mod.addAttribute("ListDetailProduct", Detailproduct);
+//		mod.addAttribute("resultMenu",MenuAPP.ListaMenuSistema());
+////	
+//		return new ModelAndView("DetallaImagen", "command", model);
+//	}
 
 	@RequestMapping(value = "/registerdetalleProduct", method = RequestMethod.GET)
 	public ModelAndView registerProduct(ModelMap mod) {

@@ -3,12 +3,8 @@ package domain.System.BusinessEntity;
 import domain.System.BusinessEntity.Base.*;
 
 public class ViewProductBE {
-	   public Producto getProducto() {
-		return Producto;
-	}
-	public void setProducto(Producto producto) {
-		Producto = producto;
-	}
+
+
 	public Price getPrice() {
 		return Price;
 	}
@@ -39,8 +35,16 @@ public class ViewProductBE {
 	public void setStock(Stock stock) {
 		Stock = stock;
 	}
-	   private Producto Producto ;
-	   private Price Price ;
+
+	private Product Product;
+	   public Product getProduct() {
+		return Product;
+	}
+	public void setProduct(Product product) {
+		Product = product;
+	}
+
+	private Price Price ;
 	   private Clothing Clothing ;
 	   private Color Color ;
 	   private Imagen Imagen ;

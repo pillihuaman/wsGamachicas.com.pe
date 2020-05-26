@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,93 +17,96 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import common.system.AppPropertiesConfig;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import common.system.ViewModel.ListProductViewModel;
-import common.system.ViewModel.ModelEntities;
+import common.system.AppPropertiesConfig;
+import common.system.MenuAPP;
+import common.system.model.response.HomeViewModelResponse;
+import common.system.model.response.UsersResponse;
 import common.system.webservice.Adapter.Generic;
+import common.system.webservice.Adapter.HelpService;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailproduct;
+import domain.System.BusinessEntity.Base.Groupparameter;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
+import domain.System.BusinessEntity.Base.Menu;
+import domain.System.BusinessEntity.Base.Parameter;
+import domain.System.BusinessEntity.Base.ParentMenu;
 import domain.System.BusinessEntity.Base.Producto;
+import domain.System.BusinessEntity.Base.Users;
 import model.system.repository.WebService;
 import model.system.repository.stockClothes;
 //import model.system.repository.stockClothes;
 import repository.System.DataAccess.MySql.ImagenDa;
 
 @Controller
-public class WelcomeController {
+public class WelcomeController extends MenuAPP {
+	@Autowired
+	HelpService helpService;
 	RestTemplate restTemplate = new RestTemplate();
-	// inject via application.properties
-	// @Value("${welcome.message:test}")
-	// private String message = "Hello World";
-	public String Url()
-	{
-		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
-		 try {
-			return AppPropertiesConfig.getPropValues("urlImagenAPI")+"/"+"WebService/";
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public String UrlAPP()
-	{
-		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
-		 try {
-			return AppPropertiesConfig.getPropValues("urlImagenAPP");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+	List<ParentMenu> ParentMenulst = null;
 	@RequestMapping("/")
-	public ModelAndView welcome(Model mod) {
-		AppPropertiesConfig AppPropertiesConfig = new AppPropertiesConfig();
-		String UrlParrent = "";
-		try {
-			UrlParrent = AppPropertiesConfig.getPropValues("urlImagenAPI");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public ModelAndView welcome(Model mod) throws JsonProcessingException {
+//		Generic<Users,UsersResponse> generic= new Generic<Users,UsersResponse>();
+//		UsersResponse response = new UsersResponse();
+//		Users user= new  Users();
+//		generic.CallWebServiceApi(user, response, "POST",  helpService.getDomainAPICore()+"/userService/userSelByMail");
+//		response=generic.getRs();
+//		ListaProducto();
+		List<HomeViewModel> lstImagenTop = new ArrayList<HomeViewModel>();
+//		// Call to Api
+		Integer count =20;//Cantidad de productos a devolver
+		Generic<Integer,HomeViewModelResponse> generic= new Generic<Integer,HomeViewModelResponse>();
+		HomeViewModelResponse response = new HomeViewModelResponse();
+		generic.CallWebServiceApi(count, response, "POST",  helpService.getDomainAPICore()+"/WebServiceImagen/ListImagenByTop");
+		response=generic.getRs();
+////		// end call
+		for (HomeViewModel objhome : response.getListHomeViewModel()) {
+			objhome.getImagen().setUrl( helpService.getDomainAPICore() +"/WebServiceImagen/GetPicture?id="+objhome.getImagen().getIdImagen());
+			lstImagenTop.add(objhome);
 		}
-		String url = UrlParrent + "/sid?id=";
-		ListaProducto();
-		List<HomeViewModel> lsturlimagen = new ArrayList<HomeViewModel>();
-		// Call to Api
-		ResponseEntity<HomeViewModel[]> result = restTemplate.postForEntity(Url()+"ListImagenByIdProduct", new Producto(), HomeViewModel[].class);
-		// end call
 
-		//mod.addAttribute("ListClothesLine", stockClothes.ListClothesLine());
-		//mod.addAttribute("Mensaje", "Registra informacion basica");
-		// model atribute para que retorne una lista de imagenes
-		//imf = obj.list();
-//		pro1.getListImagenByIdProduct();
-	
-		for (HomeViewModel objhome :  result.getBody()) {
-			objhome.getImagen().setUrl((url + objhome.getImagen().getIdimagen()));
-			lsturlimagen.add(objhome);
-		}
-		mod.addAttribute("urlDomain", UrlParrent);
-		mod.addAttribute("listaimagenes", lsturlimagen);
-		mod.addAttribute("UrlAPP", UrlAPP());
-		//ViewStockBE mdod = new ViewStockBE();
-		//Clothingline ob = new Clothingline();
-		//Imagen img = new Imagen();
-		//mdod.setClothingline(ob);
-		//mdod.setImagen(img);
-
-		// byte[] ViewStockBE bytes =
-		// StreamUtils.copyToByteArray(imgFile.getInputStream());
-
-		//byte[] bytes = null;
-		//for (Imagen imagen : imf) {
-			//bytes = imagen.getImagendata();
-		//}
+//		// Call to ApiMenu
+//		Groupparameter Groupparameter = new Groupparameter();
+//		Groupparameter.setIdGroupparameter(1);
+//		ResponseEntity<ParentMenu[]> ParentMenu = restTemplate.postForEntity(Url() + "parentmenuList", new ParentMenu(),
+//				ParentMenu[].class);
+//		// end call
+//
+//		// Call to parameter
+//		Parameter parameter = new Parameter();
+//		parameter.setName("API_URL"); // Call to API URL
+//		ResponseEntity<Parameter[]> Parameterlist = restTemplate.postForEntity(Url() + "Parametersel", parameter,
+//				Parameter[].class);
+//		APIURl = Parameterlist.getBody();
+//		// end call
+//
+//		// Call to parameter
+//		Parameter apparameter = new Parameter();
+//		apparameter.setName("APP_URL"); // Call to API URL
+//		ResponseEntity<Parameter[]> Apparameterlist = restTemplate.postForEntity(Url() + "Parametersel", apparameter,
+//				Parameter[].class);
+//		APPURl = Apparameterlist.getBody();
+//		// end call
+//		ParentMenulst = new ArrayList<>();
+//		for (ParentMenu sParentMenu : ParentMenu.getBody()) {
+//			if (sParentMenu.getPath().contains("/")) {
+//				String urlhome=APIURl[0].getValue()+"/"+sParentMenu.getPath();
+//				sParentMenu.setPath(urlhome);
+//				ParentMenulst.add(sParentMenu);
+//			} else {
+//				String urlhome=APPURl[0].getValue()+sParentMenu.getPath();
+//				sParentMenu.setPath(urlhome);
+//				ParentMenulst.add(sParentMenu);
+//			}
+//		}
+		mod.addAttribute("DomainAPICore", helpService.getDomainAPICore());
+		mod.addAttribute("DomainAPPGamachicas", helpService.getDomainAPPGamachicas());
+		mod.addAttribute("lstImagenTop", lstImagenTop);
+//		mod.addAttribute("UrlAPP", UrlAPP());
+//		mod.addAttribute("resultMenu", ParentMenulst);
 		return new ModelAndView("home", "command", new ViewStockBE());
 	}
 
