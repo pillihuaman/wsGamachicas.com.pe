@@ -31,10 +31,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/Imagen/RegisterImagen.jsp" />
 	</definition>
-	<definition name="RegisterImagen" extends="base-definition">
-		<put-attribute name="title" value="registerImagen" />
+	<definition name="RegisterDetalleImagenBYProduct" extends="base-definition">
+		<put-attribute name="title" value="registerDetalleImagenBYProduct" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/Imagen/RegisterImagen.jsp" />
+			value="/WEB-INF/views/Imagen/RegisterDetalleImagenBYProduct.jsp" />
 	</definition>
 	<definition name="upload" extends="base-definition">
 		<put-attribute name="title" value="Upload" />

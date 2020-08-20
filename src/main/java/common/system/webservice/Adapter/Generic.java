@@ -13,7 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import common.system.AppPropertiesConfig;
 import common.system.RequestResponse.JwtRequest;
+import common.system.model.response.AuthenticationResponse;
 import common.system.model.response.HomeViewModelResponse;
+import common.system.model.response.ProductoResponse;
 import common.system.model.response.UsersResponse;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Users;
@@ -44,20 +46,26 @@ public class Generic<RQ, RS> {
 
 	public String TokenKey() {
 		JwtRequest jsonRequest = new JwtRequest();
+		AuthenticationResponse auth= new AuthenticationResponse();
 		jsonRequest.setPassword(helpService.getPassword());
 		jsonRequest.setUsername(helpService.getUserName());
-		ResponseEntity<?> requestJson;
+		ResponseEntity<AuthenticationResponse> requestJson;
 		requestJson = restTemplate.postForEntity(helpService.getDomainAPICore() + "/authenticate",
-				jsonRequest, String.class);
-		return (String) requestJson.getBody();
+				jsonRequest, AuthenticationResponse.class);
+		auth=requestJson.getBody();
+		return  auth.getToken();
 	}
 
 	@SuppressWarnings("unchecked")
-	public void CallWebServiceApi(RQ request, RS reponsew, String MethodType, String url)
+	public void CallWebServiceApi(RQ request, RS reponsew, String MethodType, String url ,String token)
 			throws JsonProcessingException {
+		 String tokens="";
+		 tokens=token;
+		  if(tokens.isEmpty())
+		  {tokens=TokenKey(); }
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Authorization", "Bearer " + TokenKey());
+		headers.set("Authorization", "Bearer " + tokens);
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		String json = ow.writeValueAsString(request);
 		HttpEntity<String> entity = new HttpEntity<String>(json, headers);
@@ -73,6 +81,11 @@ public class Generic<RQ, RS> {
 		}
 		else if (request instanceof Integer && reponsew instanceof HomeViewModelResponse && MethodType == "POST") {
 			HomeViewModelResponse result = restTemplate.postForObject(url, entity, HomeViewModelResponse.class);
+			;
+			setRs((RS) result);
+		}
+		else if (request instanceof String && reponsew instanceof ProductoResponse && MethodType == "POST") {
+			ProductoResponse result = restTemplate.postForObject(url, entity, ProductoResponse.class);
 			;
 			setRs((RS) result);
 		}

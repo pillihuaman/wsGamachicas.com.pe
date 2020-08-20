@@ -32,8 +32,9 @@
 					</div>
 					<!-- Product Description -->
 					<div class="product-description">
-						<h4 class="product-price">${item.getPrice().higherPrice}/s. 
-						Por Unidad   ${item.getPrice().smallerPrice}/s.</h4>
+						<small> <s class="red">
+								${item.getPrice().smallerPrice}/s. </s>
+						</small> <b class="green"> ${item.getPrice().higherPrice}/s.</b> .
 						<p>${item.getProduct().name}</p>
 
 						<!-- Add to Cart -->

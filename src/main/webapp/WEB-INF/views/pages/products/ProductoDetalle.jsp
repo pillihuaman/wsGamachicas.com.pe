@@ -3,26 +3,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <div class="form-group">
 	<label class="col-sm-12 control-label no-padding-right">
 		Detalles Tecnico del Producto</label>
-	<div class="controls col-sm-6" >
+	<div class="controls col-sm-6">
 		<label class="control-label" for="username">Productos:</label> <select
 			id="idProducto" class="form-control optionidProducto">
 			<option value="-1">Selecionar..</option>
 			<c:forEach items="${ListProduct}" var="item">
-				<option value="<c:out value="${item.idProducto}" />"><c:out
-						value="${ item.nombre}" /></option>
+				<option value="<c:out value="${item.idPfroduct}" />"><c:out
+						value="${ item.name}" /></option>
 			</c:forEach>
-		</select>
-	</div>
-</div>
-<div class="col-sm-12">
-	<div class="form-group">
-		<input name="urldomain" type="hidden" id="urldomain"
-			value="${listaimagenes}">
 
+		</select>
 	</div>
 </div>
 <div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all"
@@ -112,8 +105,8 @@
 		<div class="ui-jqgrid-bdiv"
 			style="height: auto; width: 420px; display: block;">
 			<div style="position: relative;">
-			<div id="tblCreate"></div>
-			
+				<div id="tblCreate"></div>
+
 			</div>
 		</div>
 	</div>
@@ -308,30 +301,31 @@
 	role="dialog" aria-labelledby="exampleModalCenterTitle"
 	aria-hidden="true">
 	<form action="" id="frmFormDetalleProducto">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Registra
-					Detalle Producto</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close" onclick="clearForm();">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<span class="input-icon"> <input type="text" id="tipo"
-					placeholder="Tipo" class="form-control" />
-				</span> <span class="input-icon input-icon-right"> <input id="descripcion"
-					type="text" placeholder="Descripción" class="form-control" />
-				</span>
-			</div>
-			<div id="msgResponse"></div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" onclick="clearForm();" data-dismiss="modal">Cerrar</button>
-				<button type="button" class="btn btn-primary GuardarProducto">Guardar</button>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Registra
+						Detalle Producto</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" onclick="clearForm();">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span class="input-icon"> <input type="text" id="tipo"
+						placeholder="Tipo" class="form-control" />
+					</span> <span class="input-icon input-icon-right"> <input
+						id="descripcion" type="text" placeholder="Descripción"
+						class="form-control" />
+					</span>
+				</div>
+				<div id="msgResponse"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						onclick="clearForm();" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary GuardarProducto">Guardar</button>
+				</div>
 			</div>
 		</div>
-	</div>
-		</form>
+	</form>
 </div>
-

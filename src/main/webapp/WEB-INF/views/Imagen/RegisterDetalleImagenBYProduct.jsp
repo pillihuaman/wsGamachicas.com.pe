@@ -12,7 +12,7 @@
 
 <body>
   <div class="container">
-      <form:form method = "POST" action ="/addImagen" enctype="multipart/form-data">
+      <form:form method = "POST" action ="/RegisterDetalleImagenBYProduct" enctype="multipart/form-data">
   <fieldset>
     <div id="legend">
       <legend class="">Registrar Informacion de la imagen</legend>
@@ -26,10 +26,10 @@
       <!-- Username -->
       <label class="control-label"  for="username">Ropas</label>
       <div class="controls">
-       <select name="Imagen.idimagen"  class="form-control">
+       <select name="product.idProduct"  class="form-control">
     <option value="-1">Selecionar..</option>
-    <c:forEach items="${ListClothes}" var="item">
-    <option value="<c:out value="${item.idimagen}" />"><c:out value="${item.name}" /></option>
+    <c:forEach items="${ListProduct}" var="item">
+    <option value="<c:out value="${item.idProduct}" />"><c:out value="${item.name}" /></option>
       </c:forEach>
   </select>
       </div>

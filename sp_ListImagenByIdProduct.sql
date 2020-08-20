@@ -1,36 +1,16 @@
+
 use Gamachicas;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS gamachicas.sp_ListImagenByIdProduct $$
 CREATE PROCEDURE sp_ListImagenByIdProduct
-( IN idProduct int(11))
+( IN IdProduct int(11))
 BEGIN
-SELECT im.idImagen ,
-       im.Description,
-	   im.CountViews,
-       pro.idProduct,
-       pro.name ,
-	   pre.HigherPrice,
-       pre.SmallerPrice
-FROM   gamachicas.imagen im
-       INNER JOIN gamachicas.product pro
-     
-     ON pro.idImagen = im.IdImagen
-		INNER JOIN gamachicas.price pre
-               ON pre.IdProduct = pro.idProduct
-               where pro.idProduct=idProduct;
-/*SELECT im.idImagen ,
-       im.Description,
-	   im.CountViews,
-       pro.idProduct,
-       pro.name ,
-       pre.HigherPrice,
-       pre.SmallerPrice
-FROM   gamachicas.imagen im
-       INNER JOIN gamachicas.product pro
-               ON pro.idImagen = im.IdImagen
-       INNER JOIN gamachicas.price pre
-               ON pre.IdProduct = pro.idProduct
-ORDER  BY im.CountViews DESC
-LIMIT  20; */
+ select pro.Description, pro.Name ,pro.idProduct,pri.SmallerPrice,pri.HigherPrice,
+ im.CountViews,im.PositionWeb,im.idImagen,det.idDetailImagen
+ from gamachicas.imagen im
+ inner join gamachicas.product  pro  on im.IdImagen=pro.IdImagen
+ inner join gamachicas.price pri on pri.IdProduct=pro.IdProduct
+ inner join gamachicas.detailimagen det on det.IdImagen=im.IdImagen
+  where im.IdImagen=IdImagen ;
  END$$
 DELIMITER ;
